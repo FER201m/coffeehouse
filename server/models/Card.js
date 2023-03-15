@@ -7,13 +7,18 @@ const CardSchema = new mongoose.Schema(
       required: true,
       default: true
     },
+    status: {
+      type: Boolean,
+      required: true,
+      default: true
+    },
     number: {
         type: Number,
         required:true,
-    }
+    },
   },
   {
-    timestamps: true,
+    timestamps: false,
     versionKey: false
   }
 );

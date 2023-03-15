@@ -2,62 +2,48 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    avatar: {
-      type: Object,
-      default: {
-        bucketName:"photos",
-        filename: "defaultAvatar.jpg",
-      }
-    },
-    address: {
-      type: String,
-    },
+    avatar: { type: String, requied: true },
     fullname: {
       type: String,
       required: true,
-    },
-    gender: {
-      type: String,
-    },
-    dateOfBirth: {
-      type: String,
-    },
-    address: {
-      type: String,
     },
     email: {
       type: String,
       required: false,
       unique: true,
-      sparse: true,
     },
     phone: {
       type: String,
-      sparse:true
+      required: false,
+      unique: true,
+    },
+    gender: {
+      type: String,
+      required: true,
+    },
+    dob: {
+      type: Date,
+      required: true,
+    },
+    address: {
+      type: String,
     },
     password: {
       type: String,
       min: 6,
+      required: true,
       // required: true, //login by google not need
     },
-    nationalId: {
-      type: String,
-    },
-    role_code: {
-      type: String,
+    role: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"Role",
       required: true,
-      default: "R3",
     },
-    degree: {
-      type: String,
-    },
-    profile: {
-      type: String,
-    },
-    status:{
+    status: {
       type: Boolean,
-      default:true
-    }
+      required: true,
+      default: true,
+    },
   },
   {
     versionKey: false,

@@ -5,10 +5,12 @@ const BillDrinkSchema = new mongoose.Schema(
     bill_id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref:"Bill"
     },
     drink_id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref:"Drink"
     },
     quantity: {
       type: Number,

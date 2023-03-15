@@ -9,6 +9,9 @@ const port = 3000;
 // Router import
 const authRouter = require('./routes/authRouter')
 const userRouter = require('./routes/userRouter')
+const drinkRouter = require('./routes/drinkRouter')
+const billRouter = require('./routes/billRouter')
+const cardRouter = require('./routes/cardRouter')
 
 // Middleware for parsing JSON data in requests
 require("dotenv").config();
