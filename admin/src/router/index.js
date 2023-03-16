@@ -1,8 +1,9 @@
+import { Drinks } from "~/pages/Drinks";
 import { Dashboard } from "../pages/Dashboard";
 
 const authRouter = [
     { path: "/", component: Dashboard, layout: null },
-    { path: "/home", component: Dashboard, layout: null }, // Demo, có thể xóa
+    { path: "/drinks", component: Drinks, layout: null },
 ]
 
 export { authRouter }
