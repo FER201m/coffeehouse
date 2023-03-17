@@ -3,7 +3,7 @@
 
 function Home() {
   return (
-    <h1 sx={{color: 'black'}}>Home</h1>
+    <h1>Home</h1>
   )
 }
 

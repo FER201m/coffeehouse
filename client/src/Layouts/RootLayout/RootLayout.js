@@ -14,7 +14,6 @@ function RootLayout(props) {
       sx={{
         color: "#fff",
         "& > .MuiBox-root > .MuiBox-root": {
-          p: 1,
           fontSize: "0.875rem",
           fontWeight: "700",
         },
@@ -25,7 +24,7 @@ function RootLayout(props) {
         <Box className={classes.navigation}>
           <Navbar />
         </Box>
-        <Box className="classes.productList">
+        <Box className={classes.productList}>
           <Outlet />
         </Box>
         <Box className={classes.order}>Order</Box>

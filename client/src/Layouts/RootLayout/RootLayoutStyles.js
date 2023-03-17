@@ -9,10 +9,9 @@ const styles = {
   },
   navigation: {
     gridArea: "nav",
-    background: "orange",
   },
   productList: {
-    background: "orange",
+    background: "#fafafa",
     gridArea: "mainContent",
   },
   header: {
