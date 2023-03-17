@@ -12,12 +12,12 @@ const DrinkSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      // required: true,
+      required: true,
     },
-    isAvailable: {
+    status: {
       type: Boolean,
       default: true
-    }
+    },
   },
   {
     timestamps: true,
