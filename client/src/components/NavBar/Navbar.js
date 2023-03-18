@@ -8,26 +8,7 @@ import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import ViewListRoundedIcon from "@mui/icons-material/ViewListRounded";
 import { withStyles } from "@mui/styles";
 
-const styles = {
-  link: {
-    textDecoration: "none",
-    paddingTop: 20,
-    color: "#818181",
-    textAlign: "center",
-    margin: "0 auto",
-    "&:hover": { color: "#ec7a0a" },
-  },
-  listItem: {
-    marginTop: "30px",
-    cursor: "pointer",
-    borderRadius: "20px",
-    width: "77px!important",
-    height: "84px",
-    margin: "auto auto",
-    color: "#ec7a0a",
-    "&:hover": { background: "#fdf0e2", color: "#ec7a0a" },
-  }
-};
+import styles from './NavbarStyle'
 
 function Navbar(props) {
   const {classes} = props;

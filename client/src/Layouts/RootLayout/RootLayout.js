@@ -1,10 +1,14 @@
+// library folder
 import React from "react";
 import Box from "@mui/material/Box";
 import { withStyles } from "@mui/styles";
 import PropTypes from "prop-types";
-import Navbar from "~/components/NavBar/Navbar";
 import { Outlet } from "react-router-dom";
-import styles from './RootLayoutStyles'
+
+// project folder
+import Navbar from "~/components/NavBar/Navbar";
+import Header from "~/components/Header/Header";
+import styles from "./RootLayoutStyles";
 
 function RootLayout(props) {
   const { classes } = props;
@@ -20,13 +24,15 @@ function RootLayout(props) {
       }}
     >
       <Box className={classes.containerGrid}>
-        <Box className={classes.header}>Header</Box>
-        <Box className={classes.navigation}>
+        <header className={classes.header}>
+          <Header/>
+        </header>
+        <nav className={classes.navigation}>
           <Navbar />
-        </Box>
-        <Box className={classes.productList}>
+        </nav>
+        <main className={classes.productList}>
           <Outlet />
-        </Box>
+        </main>
         <Box className={classes.order}>Order</Box>
       </Box>
     </Box>
