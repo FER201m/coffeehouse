@@ -3,7 +3,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { withStyles } from "@mui/styles";
 import PropTypes from "prop-types";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 // project folder
 import Navbar from "~/components/NavBar/Navbar";
@@ -12,6 +12,10 @@ import styles from "./RootLayoutStyles";
 
 function RootLayout(props) {
   const { classes } = props;
+
+  const history = useLocation();
+
+  console.log({history});
 
   return (
     <Box
@@ -30,7 +34,7 @@ function RootLayout(props) {
         <nav className={classes.navigation}>
           <Navbar />
         </nav>
-        <main className={classes.productList}>
+        <main className={history.pathname === '/order' ? "" : classes.productList}>
           <Outlet />
         </main>
         <Box className={classes.order}>Order</Box>
