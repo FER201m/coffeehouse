@@ -15,7 +15,7 @@ function Navbar(props) {
 
   return (
     <>
-      <CoffeeMakerIcon sx={{ fontSize: 50, color: "#61411a", width: "100%", marginTop: '24px' }} />
+      <CoffeeMakerIcon sx={{ fontSize: 50, color: "#af804e", width: "100%", marginTop: '24px' }} />
       <List>
         <ListItem className={classes.listItem}>
           <NavLink to="/" className={classes.link}>

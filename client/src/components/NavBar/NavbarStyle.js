@@ -2,7 +2,7 @@ const styles = {
   link: {
     textDecoration: "none",
     paddingTop: 20,
-    color: "#818181",
+    color: "#cd9f68",
     textAlign: "center",
     margin: "0 auto",
     "&:hover": { color: "#ec7a0a" },

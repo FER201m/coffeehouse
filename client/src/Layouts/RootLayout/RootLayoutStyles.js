@@ -13,13 +13,13 @@ const styles = {
   productList: {
     background: "#fafafa",
     gridArea: "mainContent",
+    padding: "120px 80px"
   },
   header: {
     gridArea: "header",
-    bgcolor: "primary.main",
-    background: "linear-gradient(45deg, #f0e6de 30%, #f0e6de 90%)",
+    background: "linear-gradient(45deg, #af804e 30%, #cd9f68 90%)",
     color: "white",
-    position: 'relative'
+    position: 'relative',
   },
   order: {
     gridArea: "order",
