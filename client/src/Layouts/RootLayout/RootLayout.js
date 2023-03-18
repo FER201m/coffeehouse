@@ -15,8 +15,6 @@ function RootLayout(props) {
 
   const history = useLocation();
 
-  console.log({history});
-
   return (
     <Box
       sx={{
@@ -34,7 +32,7 @@ function RootLayout(props) {
         <nav className={classes.navigation}>
           <Navbar />
         </nav>
-        <main className={history.pathname === '/order' ? "" : classes.productList}>
+        <main className={history.pathname.includes('order') ? classes.defaultMainContent : classes.productList}>
           <Outlet />
         </main>
         <Box className={classes.order}>Order</Box>

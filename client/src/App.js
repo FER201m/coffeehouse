@@ -23,7 +23,7 @@ const router = createBrowserRouter(
       <Route path="drinks" element={<ProductList />} />
 
       <Route path="order" element={<OrderLayout/>}>
-        <Route path="order-on-process" element={<OrderOnProcess/>}/>
+        <Route index element={<OrderOnProcess/>}/>
         <Route path="order-completed" element={<OrderCompleted/>}/>
       </Route>
     </Route>

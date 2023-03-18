@@ -7,15 +7,28 @@ const styles = {
   link: {
     textDecoration: "none",
   },
+  OrderLayout: {
+    backgroundColor: '#fafafa',
+    gridArea: "mainContent",
+    padding: '10px 30px'
+  },
+  btn: {
+    borderRadius: "999px",
+    backgroundColor: "#ebebeb",
+    color: "#8e8e8e",
+    fontWeight: "bold",
+    padding: "6px 17px",
+    marginLeft: '10px'
+  }
 };
 
 function OrderLayout(props) {
   const { classes } = props;
 
   return (
-    <div>
+    <div className={classes.OrderLayout}>
       <header>
-        <NavLink to="order-on-process" className={classes.link}>
+        <NavLink to="" className={classes.link}>
           <Button
             sx={{
               borderRadius: "999px",
@@ -30,14 +43,7 @@ function OrderLayout(props) {
         </NavLink>
         <NavLink to="order-completed" className={classes.link}>
           <Button
-            sx={{
-              borderRadius: "999px",
-              backgroundColor: "#ebebeb",
-              color: "#8e8e8e",
-              fontWeight: "bold",
-              padding: "6px 17px",
-              marginLeft: '10px'
-            }}
+            sx={styles.btn}      
           >
             Completed
           </Button>

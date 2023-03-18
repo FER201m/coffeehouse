@@ -33,6 +33,9 @@ const styles = {
                           "nav mainContent mainContent order"
                           "nav mainContent mainContent  order"`,
   },
+  defaultMainContent: {
+    gridArea: "mainContent",
+  }
 };
 
 export default styles;
