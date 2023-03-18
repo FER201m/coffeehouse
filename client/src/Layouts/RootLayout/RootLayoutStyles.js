@@ -23,12 +23,13 @@ const styles = {
   },
   order: {
     gridArea: "order",
-    background: "hotpink",
+    background: "#ab7e49",
+    padding: "0 20px"
   },
   containerGrid: {
     display: "grid",
     gridTemplateColumns: "100px auto auto 400px",
-    gridTemplateRows: "100px 100vh",
+    gridTemplateRows: "100px 100vh",  
     gridTemplateAreas: `"nav header header header"
                           "nav mainContent mainContent order"
                           "nav mainContent mainContent  order"`,

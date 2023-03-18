@@ -9,6 +9,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "~/components/NavBar/Navbar";
 import Header from "~/components/Header/Header";
 import styles from "./RootLayoutStyles";
+import CurrentOrder from "~/components/CurrentOrder/CurrentOrder";
 
 function RootLayout(props) {
   const { classes } = props;
@@ -35,7 +36,9 @@ function RootLayout(props) {
         <main className={history.pathname.includes('order') ? classes.defaultMainContent : classes.productList}>
           <Outlet />
         </main>
-        <Box className={classes.order}>Order</Box>
+        <Box className={classes.order}>
+            <CurrentOrder/>
+        </Box>
       </Box>
     </Box>
   );
