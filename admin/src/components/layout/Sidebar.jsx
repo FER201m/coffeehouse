@@ -85,7 +85,7 @@ export const Sidebar = () => {
         { path: '/', logo: <HomeIcon />, name: 'Dashboard' },
         { path: '/home', logo: <FastfoodIcon />, name: 'Drinks' },
         { path: '/', logo: <PersonIcon />, name: 'Staff' },
-        { path: '/', logo: <StyleIcon />, name: 'Card' },
+        { path: '/cards', logo: <StyleIcon />, name: 'Card' },
     ]
 
     return (

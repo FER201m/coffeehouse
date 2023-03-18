@@ -27,11 +27,16 @@ const addNewCard = async (req, res) => {
   try {
     const { number } = req.body;
     if (!number) return res.status(400).send("Pass card number, please");
-
-    const newCard = await Card.create({ number });
+    const intNumber = parseInt(number, 10);
+    if(isNaN(intNumber)) return res.status(400).send("Send a number!");
+    if(intNumber < 0 || intNumber > 100) return res.status(400).send("Send a number in range 0 - 100");
+    const existCard = await Card.findOne({number: intNumber});
+    if(existCard) return res.status(400).send(`Card ${intNumber} already exists.`);
+    
+    const newCard = await Card.create({ number: intNumber });
     return res.status(200).json(newCard);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err.message);
   }
 };
 
