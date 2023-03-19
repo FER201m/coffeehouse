@@ -39,12 +39,13 @@ function CurrentOrder(props) {
                 </Link>
               </Typography>
             </Box>
-            <label for="quantity" className={classes.pseudo}>
+            <label htmlFor="quantity" className={classes.pseudo}>
               <input
                 id="quantity"
                 value={10}
                 type="text"
                 className={classes.qty}
+                onChange={() => {}}
               />
             </label>
           </Box>
@@ -57,6 +58,7 @@ function CurrentOrder(props) {
             type="text"
             value="ít đường, thêm topping thạch"
             className={classes.requirement}
+            onChange={() => {}}
           />
           <div className={classes.wrapperTrash}>
             <DeleteIcon className={classes.trashIcon} />

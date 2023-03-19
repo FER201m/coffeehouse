@@ -8,11 +8,11 @@ import { withStyles } from "@mui/styles";
 import styles from "./CardStyles";
 
 function CardCofee(props) {
-  const { classes } = props;
+  const { classes, drink } = props;
   return (
     <Card className={classes.card}>
       <img
-        src="https://phuclong.com.vn/uploads/dish/8ebb07f0eeccc1-resize_damdadunggu07.png"
+        src={drink.image}
         loading="lazy"
         alt="prodcut image"
         className={classes.imgProduct}
@@ -31,10 +31,10 @@ function CardCofee(props) {
       </Box>
       <Box className={classes.desc}>
         <Typography variant="h6" fontWeight="lg" gutterBottom>
-          Sữa Chua Phúc Bồn Tử Đác Cam
+          {drink.name}
         </Typography>
         <Typography fontSize="lg" gutterBottom>
-          $2,900
+          {drink.price}
         </Typography>
       </Box>
       <Button
