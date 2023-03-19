@@ -1,10 +1,8 @@
-import AspectRatio from "@mui/joy/AspectRatio";
 import Link from "@mui/joy/Link";
 import Card from "@mui/joy/Card";
 import Chip from "@mui/joy/Chip";
 import Typography from "@mui/joy/Typography";
 import { withStyles } from "@mui/styles";
-import { Box } from "@mui/system";
 
 const styles = {
   card: {

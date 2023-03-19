@@ -4,11 +4,22 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
 import { withStyles } from "@mui/styles";
+import { useDispatch } from "react-redux";
 
+import { formatPrice } from "~/utils/utilities";
 import styles from "./CardStyles";
+import { addOrder } from "~/redux/action/actions";
+
 
 function CardCofee(props) {
   const { classes, drink } = props;
+  const dispatch = useDispatch();
+
+  const handleAddOrder = () => {
+    console.log('check order: ', drink);
+    dispatch(addOrder(drink)) 
+  }
+
   return (
     <Card className={classes.card}>
       <img
@@ -34,14 +45,12 @@ function CardCofee(props) {
           {drink.name}
         </Typography>
         <Typography fontSize="lg" gutterBottom>
-          {drink.price}
+          {formatPrice(drink.price)}
         </Typography>
       </Box>
       <Button
         variant="solid"
         size="sm"
-        color="primary"
-        aria-label="Explore Bahamas Islands"
         sx={{
           ml: "auto",
           fontWeight: 600,
@@ -50,6 +59,7 @@ function CardCofee(props) {
           "&:hover": { background: "#036b4a" },
         }}
         className={classes.orderBtn}
+        onClick={handleAddOrder}
       >
         Order now
       </Button>
