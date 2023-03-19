@@ -12,6 +12,7 @@ const userRouter = require('./routes/userRouter')
 const drinkRouter = require('./routes/drinkRouter')
 const billRouter = require('./routes/billRouter')
 const cardRouter = require('./routes/cardRouter')
+const statisticsRouter = require('./routes/statisticsRouter')
 
 // Middleware for parsing JSON data in requests
 require("dotenv").config();

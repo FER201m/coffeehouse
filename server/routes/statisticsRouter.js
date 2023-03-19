@@ -1,12 +1,14 @@
 var express = require("express");
-const {  } = require("../controllers/drinkController");
+const { getStatistics, getTopSaleDrinks, getTakeAwayBillPercentage } = require("../controllers/statisticsController");
 var router = express.Router();
 
 // Get available drinks - cashier get
-router.get("/", getAvailableDrinks)
+router.get("/", getStatistics);
 
-// DELETE a card
-router.route("/:id").put(updateDrink).delete(deleteDrink);
+router.get("/top-drink", getTopSaleDrinks);
+
+router.get("/place-type", getTakeAwayBillPercentage);
+
 
 
 module.exports = router;

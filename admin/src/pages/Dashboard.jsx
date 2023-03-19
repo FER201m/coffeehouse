@@ -8,28 +8,29 @@ import {
   Stack,
   CardHeader,
 } from "@mui/material";
-import {Group, LocalDrink, Style} from "@mui/icons-material";
+import { Group, LocalDrink, Style } from "@mui/icons-material";
+import axios from "axios";
+import DrinkSaleChart from "~/components/drinkSaleChart/DrinkSaleChart";
 
-// ;
-// background-image: linear-gradient(25deg,#d64c7f,#ee4758 50%);
 export const Dashboard = () => {
-    const {statistics, setStatistics} = useState({
-        staff:0,
-        drinks: 0,
-        cards:0,
-    });
-    const {staff, drinks, cards} = statistics;
+  const [statistics, setStatistics] = useState({
+    staff: 0,
+    drinks: 0,
+    cards: 0,
+  });
 
-    useEffect(() => {
-      const fetchStatistics = async () => {
-         try {
-             const staffRes = await 
-         } catch(err) {
-          console.log(err);
-         }
+  useEffect(() => {
+    const fetchStatistics = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/api/statistics");
+        console.log(res);
+        setStatistics(res.data);
+      } catch (err) {
+        console.log(err);
       }
-    }, [])
-    
+    };
+    fetchStatistics();
+  }, []);
 
   return (
     <Stack spacing={2}>
@@ -40,7 +41,7 @@ export const Dashboard = () => {
               minWidth: 275,
               color: "#fff",
               backgroundImage:
-                "linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%)",
+                "linear-gradient(120deg, #c7f855 0%, #85e191 100%)",
             }}
           >
             <CardHeader
@@ -51,18 +52,24 @@ export const Dashboard = () => {
                 </Typography>
               }
             />
-            <Typography variant="h4" fontWeight={700} align="right" mx={3} mb={1}>
-              {staff}
+            <Typography
+              variant="h4"
+              fontWeight={700}
+              align="right"
+              mx={3}
+              mb={1}
+            >
+              {statistics.staff}
             </Typography>
           </Card>
         </Grid>
         <Grid xs={6} lg={4}>
-        <Card
+          <Card
             sx={{
               minWidth: 275,
               color: "#fff",
               backgroundImage:
-                "linear-gradient( 109.6deg, rgba(156,252,248,1) 11.2%, rgba(110,123,251,1) 91.1% )",
+                "linear-gradient( 109.6deg, rgba(112, 251, 244, 1) 11.2%, rgba(110,123,251,1) 91.1% )",
             }}
           >
             <CardHeader
@@ -73,18 +80,23 @@ export const Dashboard = () => {
                 </Typography>
               }
             />
-            <Typography variant="h4" fontWeight={700} align="right" mx={3} mb={1}>
-              7
+            <Typography
+              variant="h4"
+              fontWeight={700}
+              align="right"
+              mx={3}
+              mb={1}
+            >
+              {statistics.drinks}
             </Typography>
           </Card>
         </Grid>
         <Grid xs={6} lg={4}>
-        <Card
+          <Card
             sx={{
               minWidth: 275,
               color: "#fff",
-              backgroundImage:
-                'linear-gradient(25deg,#d64c7f,#d25068 50%)'
+              backgroundImage: "linear-gradient(25deg,#d64c7f,#d25068 50%)",
             }}
           >
             <CardHeader
@@ -95,12 +107,21 @@ export const Dashboard = () => {
                 </Typography>
               }
             />
-            <Typography variant="h4" fontWeight={700} align="right" mx={3} mb={1}>
-              7
+            <Typography
+              variant="h4"
+              fontWeight={700}
+              align="right"
+              mx={3}
+              mb={1}
+            >
+              {statistics.cards}
             </Typography>
           </Card>
         </Grid>
       </Grid>
+
+      {/* pie charts */}
+      <DrinkSaleChart/>
     </Stack>
   );
 };
