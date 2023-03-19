@@ -1,7 +1,13 @@
-import { Box, Grid, TextField, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Grid, Menu, MenuItem, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import SettingsIcon from '@mui/icons-material/Settings';
 import { DrinkPopup } from '~/components/DrinksPopup/DrinkPopup';
+import useFormatMoney from '~/hooks/useFormatMoney';
+import CoffeeIcon from '@mui/icons-material/Coffee';
+import axios from 'axios';
+import ROUTER from '~/api/server';
+import { v4 as uuidv4 } from 'uuid';
+import CardDrink from '../components/Drinks/CardDrink';
 
 const style = {
     container: {
@@ -24,11 +30,23 @@ const style = {
         objectFit: 'contain',
         marginBottom: '20px'
     },
+    image_disable: {
+        width: '60%',
+        height: 'auto',
+        objectFit: 'contain',
+        marginBottom: '20px',
+        filter: 'grayscale(100%)'
+    },
     name: {
         fontWeight: 'bold'
     },
     price: {
         color: '#876445',
+        fontWeight: 'bold',
+        fontSize: '20px'
+    },
+    price_disable: {
+        color: '#dbdbdb',
         fontWeight: 'bold',
         fontSize: '20px'
     },
@@ -41,6 +59,29 @@ const style = {
         alignItems: 'center',
         gap: "10px",
         padding: '20px 2px'
+    },
+    content_disable: {
+        backgroundColor: '#888888',
+        borderRadius: '7px',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: "10px",
+        padding: '20px 2px',
+        color: "#dbdbdb"
+    },
+    newContent: {
+        backgroundColor: '#F4DFBA',
+        borderRadius: '7px',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: "10px",
+        padding: '20px 2px',
+        height: '100%',
+        width: '100%',
     },
     search: {
         width: '100%',
@@ -71,14 +112,60 @@ const style = {
         color: '#F4DFBA',
         borderRadius: '2px'
     },
+    newButton: {
+        height: '10%',
+        padding: '0 15px',
+        fontWeight: 'bold',
+        backgroundColor: '#876445',
+        outline: 'none',
+        border: 'none',
+        color: '#F4DFBA',
+        borderRadius: '2px'
+    },
     icons: {
         position: 'absolute',
         right: '20px',
         top: '20px',
-    }
+    },
+    newDrink: {
+        fontSize: '100px'
+    },
+    newDrinkTxt: {
+        fontSize: '20px',
+        fontWeight: 'bold'
+    },
+
 }
 
 export const Drinks = () => {
+    const [popupDrink, setpopupDrink] = useState(null);
+    const [DrinkList, setDrinkList] = useState([])
+    const [openSettingId, setOpenSettingId] = useState(false);
+    const formatMoney = useFormatMoney();
+
+    useEffect(() => {
+        getDrinks()
+    }, [])
+
+    const getDrinks = async () => {
+        try {
+            const response = await axios.get(`${ROUTER}/api/drinks`);
+            setDrinkList(() => response.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const onToggleDrinkDetail = (payload) => {
+        console.log(payload);
+        setpopupDrink(() => payload)
+    }
+
+
+    const addNewDrinks = (newDrinks) => {
+        setDrinkList(drinks => [...drinks, newDrinks])
+    }
+
     return (
         <>
             <Box sx={style.search}>
@@ -86,57 +173,26 @@ export const Drinks = () => {
                 <button style={style.button}>Search</button>
             </Box>
             <Grid sx={style.container} spacing={4}>
-                <Grid item sx={style.card} xs={3}>
-                    <Box sx={style.content} >
-                        <img src="https://phuclong.com.vn/uploads/dish/a66aecd5b760eb-traolongmangcau.png" style={style.image} alt="" />
-                        <Typography sx={style.name}>Trà Ô Long Mãng Cầu</Typography>
-                        <Typography sx={style.price}>50.000 đ</Typography>
+
+                <Grid item sx={style.card} xs={3} className="hover" >
+                    <Box sx={style.newContent} onClick={() => onToggleDrinkDetail(0)} >
+
+                        <CoffeeIcon style={style.newDrink} />
+                        <Typography sx={style.newDrinkTxt}>Create new drink</Typography>
                     </Box>
-                    <SettingsIcon style={style.icons} />
+                    {popupDrink == 0 ? <DrinkPopup addNewDrinks={addNewDrinks} drink={false} onClose={onToggleDrinkDetail} /> : undefined}
                 </Grid>
 
-                <Grid item sx={style.card} xs={3}>
-                    <Box sx={style.content} >
-                        <img src="https://phuclong.com.vn/uploads/dish/a66aecd5b760eb-traolongmangcau.png" style={style.image} alt="" />
-                        <Typography sx={style.name}>Trà Ô Long Mãng Cầu</Typography>
-                        <Typography sx={style.price}>50.000 đ</Typography>
-                    </Box>
-                    <SettingsIcon style={style.icons} />
-
-                </Grid>
-
-                <Grid item sx={style.card} xs={3}>
-                    <Box sx={style.content} >
-                        <img src="https://phuclong.com.vn/uploads/dish/a66aecd5b760eb-traolongmangcau.png" style={style.image} alt="" />
-                        <Typography sx={style.name}>Trà Ô Long Mãng Cầu</Typography>
-                        <Typography sx={style.price}>50.000 đ</Typography>
-                    </Box>
-                    <SettingsIcon style={style.icons} />
-                </Grid>
-
-                <Grid item sx={style.card} xs={3}>
-                    <Box sx={style.content} >
-                        <img src="https://phuclong.com.vn/uploads/dish/a66aecd5b760eb-traolongmangcau.png" style={style.image} alt="" />
-                        <Typography sx={style.name}>Trà Ô Long Mãng Cầu</Typography>
-                        <Typography sx={style.price}>50.000 đ</Typography>
-                    </Box>
-                    <SettingsIcon style={style.icons} />
-                    <DrinkPopup />
-                </Grid>
-
-                <Grid item sx={style.card} xs={3}>
-                    <Box sx={style.content} >
-                        <img src="https://phuclong.com.vn/uploads/dish/a66aecd5b760eb-traolongmangcau.png" style={style.image} alt="" />
-                        <Typography sx={style.name}>Trà Ô Long Mãng Cầu</Typography>
-                        <Typography sx={style.price}>50.000 đ</Typography>
-                    </Box>
-                    <SettingsIcon style={style.icons} />
-
-                </Grid>
-
-
-
-            </Grid>
+                {
+                    DrinkList.map(drink => (
+                        <CardDrink drink={drink}
+                            key={uuidv4()}
+                            setDrinkList={setDrinkList}
+                            DrinkList={DrinkList}
+                        />
+                    ))
+                }
+            </Grid >
         </>
     )
 }
