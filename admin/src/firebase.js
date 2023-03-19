@@ -8,12 +8,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: "admin-lama-81242.firebaseapp.com",
-  projectId: "admin-lama-81242",
-  storageBucket: "admin-lama-81242.appspot.com",
-  messagingSenderId: "151749375723",
-  appId: "1:151749375723:web:a35de6a9a1dc4c440af0ae",
+    apiKey: "AIzaSyAF8XWLEdGkOIIBlXY62K8xJiY7enJvjqk",
+    authDomain: "admin-lama-81242.firebaseapp.com",
+    projectId: "admin-lama-81242",
+    storageBucket: "admin-lama-81242.appspot.com",
+    messagingSenderId: "151749375723",
+    appId: "1:151749375723:web:a35de6a9a1dc4c440af0ae",
 };
 
 // Initialize Firebase

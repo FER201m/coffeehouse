@@ -83,7 +83,7 @@ export const Sidebar = () => {
 
     const selectRouter = [
         { path: '/', logo: <HomeIcon />, name: 'Dashboard' },
-        { path: '/home', logo: <FastfoodIcon />, name: 'Drinks' },
+        { path: '/drinks', logo: <FastfoodIcon />, name: 'Drinks' },
         { path: '/', logo: <PersonIcon />, name: 'Staff' },
         { path: '/cards', logo: <StyleIcon />, name: 'Card' },
     ]
