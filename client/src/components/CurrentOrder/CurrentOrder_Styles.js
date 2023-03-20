@@ -1,7 +1,6 @@
 const styles = {
   desc: {
     display: "flex",
-    gap: "46px",
   },
   img: {
     width: "40px",
@@ -25,8 +24,8 @@ const styles = {
     height: "50px",
   },
   pseudo: {
-    height: "45px",
-    width: "54px",
+    height: "48px",
+    width: "40px",
     borderRadius: "8px",
     border: "1px solid #ebebeb",
     position: 'relative',

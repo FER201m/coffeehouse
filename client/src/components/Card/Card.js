@@ -5,20 +5,31 @@ import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
 import { withStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
+import { useContext } from "react";
+import { OrderContext } from "~/Layouts/RootLayout/RootLayout";
 
 import { formatPrice } from "~/utils/utilities";
 import styles from "./CardStyles";
 import { addOrder } from "~/redux/action/actions";
 
-
 function CardCofee(props) {
   const { classes, drink } = props;
-  const dispatch = useDispatch();
+  const { listOrder, setListOrder } = useContext(OrderContext);
 
   const handleAddOrder = () => {
-    console.log('check order: ', drink);
-    dispatch(addOrder(drink)) 
-  }
+    let isDupicated = false;
+    listOrder.forEach((element) => {
+      if (element._id === drink._id) {
+        console.log("%c duplicated product", "color: red");
+        isDupicated = true;
+      }
+    });
+    if(!isDupicated) {
+      setListOrder((prev) => {
+        return [...prev, drink];
+      });
+    }
+  };
 
   return (
     <Card className={classes.card}>
@@ -30,7 +41,10 @@ function CardCofee(props) {
       />
       <Box sx={{ height: "140px" }}></Box>
       <Box className={classes.sellOff}>
-        <Typography variant="h6" sx={{ color: "#ffff", fontWeight: "bold", marginLeft: '3px' }}>
+        <Typography
+          variant="h6"
+          sx={{ color: "#ffff", fontWeight: "bold", marginLeft: "3px" }}
+        >
           20%
         </Typography>
         <Typography

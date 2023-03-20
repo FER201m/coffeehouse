@@ -5,21 +5,24 @@ import Typography from "@mui/joy/Typography";
 import Box from "@mui/material/Box";
 import { withStyles } from "@mui/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { useContext } from "react";
+import { OrderContext } from "~/Layouts/RootLayout/RootLayout";
 
 import styles from "./CurrentOrder_Styles";
 import Payment from "../Payment/Payment";
 import { formatPrice } from "~/utils/utilities";
-import { removeOrder } from "~/redux/action/actions";
 
 function CurrentOrder(props) {
   const { classes } = props;
-
-  const dispatch = useDispatch();
-  const currentOrerList = useSelector((state) => state.order.currentOrders);
+  const [quantity, setQuantity] = useState(1);
+  const {listOrder, setListOrder} = useContext(OrderContext); 
 
   const handleDeleteOrder = (id) => {
-    dispatch(removeOrder(id));
+    const newList =  listOrder.filter((order) => order._id !== id);
+    setListOrder(newList);
   }
 
   return (
@@ -27,12 +30,12 @@ function CurrentOrder(props) {
       <Typography level="h4" sx={{ my: 2, color: "#ece4d8" }}>
         Current Order
       </Typography>
-      {currentOrerList.map((orderItem) => {
+      {listOrder.map((orderItem) => {
         return (
           <Card sx={styles.card} key={orderItem._id} className='my-3'>
             <Box sx={styles.wrapper}>
               <img
-                src="https://images.unsplash.com/photo-1507833423370-a126b89d394b?auto=format&fit=crop&w=90"
+                src={orderItem.image}
                 loading="lazy"
                 alt=""
                 className={classes.img}
@@ -42,25 +45,12 @@ function CurrentOrder(props) {
                   <Typography level="h2" fontSize="md" id="card-description">
                     {orderItem.name}
                   </Typography>
-                  <Typography
-                    fontSize="sm"
-                    aria-describedby="card-description"
-                    mb={1}
-                  >
-                    <Link underline="none" sx={{ color: "text.tertiary" }}>
-                      x2
-                    </Link>
-                  </Typography>
                 </Box>
+                <RemoveCircleOutlineIcon onClick={() => setQuantity(quantity - 1)}/>
                 <label htmlFor="quantity" className={classes.pseudo}>
-                  <input
-                    id="quantity"
-                    value={10}
-                    type="text"
-                    className={classes.qty}
-                    onChange={() => {}}
-                  />
+                  <span className={classes.qty}>{quantity}</span>
                 </label>
+                <AddCircleOutlineIcon onClick={() => setQuantity(quantity + 1)}/>
               </Box>
               <Chip variant="h6" color="primary" size="sm" sx={styles.price}>
                 {formatPrice(orderItem.price)}
