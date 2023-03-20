@@ -1,6 +1,7 @@
 const styles = {
   desc: {
     display: "flex",
+    alignItems: 'center'
   },
   img: {
     width: "40px",
@@ -17,23 +18,22 @@ const styles = {
   },
   wrapper: {
     width: "100%",
-    // height: "100px",
     gap: 2,
     display: "flex",
     flexDirection: "row",
     height: "50px",
+    gap: '12px'
   },
   pseudo: {
-    height: "48px",
+    height: "30px",
     width: "40px",
     borderRadius: "8px",
     border: "1px solid #ebebeb",
     position: 'relative',
-    marginLeft: "-2px"
+    margin: "0 2px"
   },
   qty: {
     height: "20px",
-    width: "25px",
     border: "none",
     position: 'absolute',
     top: '50%',

@@ -4,13 +4,11 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
 import { withStyles } from "@mui/styles";
-import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import { OrderContext } from "~/Layouts/RootLayout/RootLayout";
 
 import { formatPrice } from "~/utils/utilities";
 import styles from "./CardStyles";
-import { addOrder } from "~/redux/action/actions";
 
 function CardCofee(props) {
   const { classes, drink } = props;
@@ -26,7 +24,7 @@ function CardCofee(props) {
     });
     if(!isDupicated) {
       setListOrder((prev) => {
-        return [...prev, drink];
+        return [...prev, {...drink, quantity: 1, note: ''}]; 
       });
     }
   };

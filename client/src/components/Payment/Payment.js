@@ -3,21 +3,32 @@ import { withStyles } from "@mui/styles";
 import Typography from "@mui/joy/Typography";
 import Box from "@mui/material/Box";
 
-
 import styles from "../CurrentOrder/CurrentOrder_Styles";
+import { useEffect, useState } from "react";
+import { formatPrice } from "~/utils/utilities";
 
 function Payment(props) {
-  const { classes } = props;    
+  const { classes, listOrder } = props;
+  const [subTotal, setSubTotal] = useState(0);
+
+  useEffect(() => {
+    const result = listOrder.reduce((acc, curValue) => {
+      const price = curValue.quantity * curValue.price;
+      return (acc = acc + price);
+    }, 0);
+    setSubTotal(result);
+  }, [listOrder]);
+
   return (
     <>
       <Box>
         <div className={classes.priceInfo}>
           <div className={classes.subTotal}>
             <Typography variant="h6" color={"text.tertiary"}>
-              Subtotal
+              subTotal 
             </Typography>
             <Typography variant="h5" color={"text.tertiary"}>
-              100.000vnd
+              {formatPrice(subTotal)}
             </Typography>
           </div>
           <div className={classes.subTotal}>
@@ -25,7 +36,7 @@ function Payment(props) {
               Discount sales
             </Typography>
             <Typography variant="h5" color={"text.tertiary"}>
-              -10.000vnd
+              0 vnd
             </Typography>
           </div>
           <div className={classes.subTotal}>
@@ -33,7 +44,7 @@ function Payment(props) {
               Total sales tax
             </Typography>
             <Typography variant="h5" color={"text.tertiary"}>
-              2.300vnd
+              0 vnd
             </Typography>
           </div>
         </div>
@@ -52,7 +63,7 @@ function Payment(props) {
           sx={{ fontSize: "30px" }}
           color={"text.tertiary"}
         >
-          92.300vnd
+          {formatPrice(subTotal)}
         </Typography>
       </div>
       <Button
