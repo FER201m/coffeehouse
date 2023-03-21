@@ -14,7 +14,6 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from "./HeaderStyles";
-import { AuthContext } from "~/context/authContext";
 import { useAuthContext } from "~/context/authContext";
 
 const style = {

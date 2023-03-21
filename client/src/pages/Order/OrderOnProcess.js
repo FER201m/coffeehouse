@@ -16,11 +16,11 @@ function OrderOnProcess(props) {
   return (
     <div className={classes.wrapper}>
       <Grid columns={{md: 12 }} container spacing={2} sx={{ flexGrow: 1 }}>
-        {Array.from(Array(3)).map((_, index) => (
-          <Grid xs={2} sm={4} md={9} key={index}>
+        {/* {Array.from(Array(3)).map((_, index) => (
+          <Grid xs={2} sm={4} md={9} key={index}> */}
             <Order />
-          </Grid>
-        ))}
+          {/* </Grid>
+        ))} */}
       </Grid>
     </div>
   );

@@ -1,4 +1,6 @@
 import _ from "lodash";
+import moment from "moment";
+
 
 function formatPrice(n) {
   return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
@@ -25,9 +27,15 @@ const validateEmail = (email) => {
     );
 };
 
+function setTime(dateString) {
+  const formattedTime = moment(dateString).format("HH:mm");
+  return <div>{formattedTime}</div>;
+}
+
 export {
     formatPrice,
     hanlderRequest,
     cloneData,
-    validateEmail
+    validateEmail,
+    setTime
 }

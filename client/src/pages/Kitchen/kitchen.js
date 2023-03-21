@@ -12,10 +12,10 @@ import { useState, useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
-import moment from "moment";
 import Paper from "@mui/material/Paper";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ModalDetail from "./ModalDetail";
+import { setTime } from "~/utils/utilities";
 
 const style = {
   tableHead: {
@@ -60,12 +60,7 @@ export default function Kitchen() {
 
     return totalDrinks;
   }
-
-  function setTime(dateString) {
-    const formattedTime = moment(dateString).format("HH:mm");
-    return <div>{formattedTime}</div>;
-  }
-
+  
   return (
     <div>
       <TableContainer
