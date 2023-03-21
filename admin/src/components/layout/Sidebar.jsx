@@ -7,6 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import StyleIcon from '@mui/icons-material/Style';
 import { v4 as uuidv4 } from 'uuid';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useAuthContext } from '~/context/authContext';
 
 const style = {
     container: {
@@ -78,6 +79,7 @@ const style = {
 
 export const Sidebar = () => {
     const [choiceIndex, setChoiceIndex] = useState(0);
+    const {logout, currentUser} = useAuthContext();
 
     const onSelectRouter = (index) => setChoiceIndex(index)
 
@@ -97,10 +99,10 @@ export const Sidebar = () => {
             <Box sx={style.avatar}>
                 <Avatar
                     alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
+                    src={currentUser?.avatar}
                     sx={{ width: 56, height: 56 }}
                 />
-                <Typography sx={style.name} >ADMIN</Typography>
+                <Typography sx={style.name} >{currentUser?.fullname}</Typography>
             </Box>
 
             {/* Select Router */}
@@ -122,7 +124,7 @@ export const Sidebar = () => {
             </Box>
 
             {/* Logout */}
-            <Box sx={style.logout}>
+            <Box sx={style.logout} onClick={() => logout()}>
                 <LogoutIcon />
                 <Typography>Exit</Typography>
             </Box>

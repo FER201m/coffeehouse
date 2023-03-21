@@ -26,7 +26,6 @@ const register = async (req, res, next) => {
         gender,
         dob,
         address,
-        password,
         role,
       } = req.body;
 
@@ -38,7 +37,7 @@ const register = async (req, res, next) => {
         gender,
         dob,
         address,
-        password,
+        password: hash,
         role,
       };
 
@@ -63,7 +62,7 @@ const login = async (req, res, next) => {
   console.log("login");
   try {
     // profile của doctor chỉ được admin thay đổi
-    const user = await UserModel.findOne({ email: req.body.email }).populate("roles");
+    const user = await UserModel.findOne({ email: req.body.email, status: true }).populate("role");
 
     if (!user) return res.status(404).send("User not exist!");
 
@@ -76,7 +75,7 @@ const login = async (req, res, next) => {
 
     const token = jwt.sign(
       { id: user._id, role: user.role.title },
-      process.env.JWT
+      "coffeehouse_key"
     );
     // console.log(token);
 
@@ -88,7 +87,7 @@ const login = async (req, res, next) => {
       .status(200)
       .json(filteredUser);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err.message);
   }
 };
 
