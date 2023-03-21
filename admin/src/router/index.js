@@ -3,6 +3,7 @@ import Upload from "~/pages/Upload";
 import { Drinks } from "~/pages/Drinks";
 import { Dashboard } from "../pages/Dashboard";
 import Staff from "~/pages/Staff";
+import Login from "~/pages/Login";
 
 const authRouter = [
     { path: "/", component: Dashboard, layout: null },

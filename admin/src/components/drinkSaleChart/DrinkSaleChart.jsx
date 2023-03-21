@@ -80,12 +80,14 @@ export default function DrinkSaleChart() {
 
   return (
     <Stack
-      container
+      // container
       spacing={2}
-      mb={4}
-      width={700}
+      boxShadow={3}
+      width={900}
+      sx={{borderRadius:4, backgroundColor:"#fff"}}
       style={{
-        margin: "10px auto",
+        margin: "20px auto 20px",
+        padding:"20px 40px"
       }}
     >
       <Box maxHeight={400} minHeight={300} mb={4} width="100%">

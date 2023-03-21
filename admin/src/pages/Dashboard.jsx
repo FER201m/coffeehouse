@@ -11,6 +11,7 @@ import {
 import { Group, LocalDrink, Style } from "@mui/icons-material";
 import axios from "axios";
 import DrinkSaleChart from "~/components/drinkSaleChart/DrinkSaleChart";
+import CalendarRevenue from "~/components/CalendarRevenue/CalendarRevenue";
 
 export const Dashboard = () => {
   const [statistics, setStatistics] = useState({
@@ -121,7 +122,12 @@ export const Dashboard = () => {
       </Grid>
 
       {/* pie charts */}
-      <DrinkSaleChart/>
+      <DrinkSaleChart />
+
+      {/* Summary by date */}
+      <Box maxWidth={800} style={{ margin: "10px auto" }} sx={{p:5, boxShadow:3, borderRadius:3, backgroundColor:"#fff"}}>
+        <CalendarRevenue />
+      </Box>
     </Stack>
   );
 };

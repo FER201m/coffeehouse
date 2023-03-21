@@ -63,12 +63,28 @@ const addNewBill = async (req, res) => {
           "Pass bill's isTakeAway, booked drinks, cashier_id, card_id, please"
         );
 
+    // let isDuplicate = false;
+    // for (let i = 0; i < drink_list.length - 1; i++) {
+    //   const foundItem = arr.find(
+    //     (compareItem, index) => drink_list[i].drink_id === compareItem.drink_id && index > i
+    //   );
+    //   if (foundItem) {
+    //     isDuplicate = true;
+    //     break;
+    //   }
+    // }
+    // if(isDuplicate) return res
+    // .status(400)
+    // .send(
+    //   "Drinks are duplicated!"
+    // );
+
     const card = await Card.findOne({
       status: true,
       isFree: true,
       _id: card_id,
     });
-    if (!card) return res.status(404).send("Card not available");
+    if (!card) return res.status(404).send("Card not free. There is a customer take it");
 
     const newBill = await Bill.create({
       card_id,
@@ -107,9 +123,13 @@ const addNewBill = async (req, res) => {
 const completeBill = async (req, res) => {
   // update name, image, price
   try {
-    const bill = await Bill.findByIdAndUpdate(req.params.id, {
-      isDone: true,
-    },{new:true});
+    const bill = await Bill.findByIdAndUpdate(
+      req.params.id,
+      {
+        isDone: true,
+      },
+      { new: true }
+    );
 
     await Card.findByIdAndUpdate(bill.card_id, { isFree: true });
     return res.status(200).json(bill);
