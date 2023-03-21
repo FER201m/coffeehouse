@@ -30,6 +30,7 @@ export default function Kitchen() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [Order, setOrder] = useState([]);
+  const [orderDetail, setOrderDetail] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8800/api/bills")
@@ -39,7 +40,6 @@ export default function Kitchen() {
       })
       .catch((error) => console.error(error));
   }, []);
-  const [orderDetail, setOrderDetail] = useState([]);
 
   function showDetail(id) {
     fetch(`http://localhost:8800/api/bills/${id}`)
@@ -99,15 +99,15 @@ export default function Kitchen() {
                 }}
               >
                 <TableCell align="center">{dto.card_id.number}</TableCell>
-                <TableCell align="center">{dto.cashier_id.fullname}</TableCell>
+                <TableCell align="center">{dto.cashier_id?.fullname}</TableCell>
                 <TableCell align="center">{totalDrink(dto._id)}</TableCell>
                 <TableCell align="center">{setTime(dto.date)}</TableCell>
 
                 <TableCell align="center">
                   {dto.isTakeAway ? (
-                    <CheckIcon style={{ color: "green" }} />
+                    <CheckIcon style={{ color: "green", cursor: 'pointer' }} />
                   ) : (
-                    <CloseIcon style={{ color: "red" }} />
+                    <CloseIcon style={{ color: "red", cursor: 'pointer' }} />
                   )}
                 </TableCell>
 

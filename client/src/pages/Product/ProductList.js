@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import CardCofee from "../components/Card/Card";
+import CardCofee from "../../components/Card/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchDrinks } from "~/redux/action/actions";

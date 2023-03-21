@@ -7,6 +7,7 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import ViewListRoundedIcon from "@mui/icons-material/ViewListRounded";
 import { withStyles } from "@mui/styles";
+import BlenderIcon from '@mui/icons-material/Blender';
 
 import styles from './NavbarStyle'
 
@@ -33,6 +34,12 @@ function Navbar(props) {
           <NavLink to="order" className={classes.link}>
             <ShoppingCartRoundedIcon />
             <ListItemText className={classes.text} primary="Order" />
+          </NavLink>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <NavLink to="kitchen" className={classes.link}>
+            <BlenderIcon/>
+            <ListItemText className={classes.text} primary="Kitchen" />
           </NavLink>
         </ListItem>
       </List>

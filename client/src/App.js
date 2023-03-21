@@ -10,10 +10,11 @@ import RootLayout from "./Layouts/RootLayout/RootLayout";
 import OrderLayout from "./Layouts/OrderLayout/OrderLayout";
 
 // page
-import ProductList from "./pages/ProductList";
-import Home from "./pages/Home";
+import ProductList from "./pages/Product/ProductList";
+import Home from "./pages/Home/Home";
 import OrderOnProcess from "./pages/Order/OrderOnProcess";
 import OrderCompleted from "./pages/Order/OrderCompleted";
+import Kitchen from "./pages/Kitchen/kitchen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,25 +22,18 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="drinks" element={<ProductList />} />
 
-      <Route path="order" element={<OrderLayout/>}>
-        <Route index element={<OrderOnProcess/>}/>
-        <Route path="order-completed" element={<OrderCompleted/>}/>
+      <Route path="order" element={<OrderLayout />}>
+        <Route index element={<OrderOnProcess />} />
+        <Route path="order-completed" element={<OrderCompleted />} />
       </Route>
+
+      <Route path="kitchen" element={<Kitchen />} />
     </Route>
   )
 );
 
 function App() {
   return <RouterProvider router={router} />;
-import Kitchen2 from './components/kitchen.v2';
-import ResponsiveAppBar from './components/Header';
-function App() {
-  return (
-    <div className="App">
-      <ResponsiveAppBar/>
-      <Kitchen2 />
-    </div>
-  );
 }
 
 export default App;
