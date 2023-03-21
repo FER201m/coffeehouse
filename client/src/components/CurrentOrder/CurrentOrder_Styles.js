@@ -84,7 +84,6 @@ const styles = {
   printBillBtn: {
     width: '100%',
     height: '48px',
-    
   },
   priceInfo: {
     marginTop: '20px'

@@ -15,18 +15,10 @@
     "babel-plugin-module-resolver": "^5.0.0",
     "chart.js": "^4.2.1",
     "customize-cra": "^1.0.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
->>>>>>> 8aa6f13f25aeb846fda26b7a6ae66be9b79a7afb
     "firebase": "^9.18.0",
     "mui-datatables": "^4.3.0",
-=======
-    "dotenv": "^16.0.3",
-    "firebase": "^9.18.0",
->>>>>>> cc80185c3453bef56019f88e5fb2914292203799
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-calendar": "^4.0.0",
@@ -34,10 +26,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
     "react-toastify": "^9.1.1",
-=======
->>>>>>> cc80185c3453bef56019f88e5fb2914292203799
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },

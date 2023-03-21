@@ -70,7 +70,7 @@ function ModalDetail(props) {
             </TableHead>
             <TableBody>
               {orderDetail.map((odl) => (
-                <TableRow>
+                <TableRow key={odl._id}>
                   <TableCell align="center">
                     <img src={odl.drink_id.image} style={{ width: "50px" }} />
                   </TableCell>

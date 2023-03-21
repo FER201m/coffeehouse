@@ -37,7 +37,7 @@ function Navbar(props) {
           </NavLink>
         </ListItem>
         <ListItem className={classes.listItem}>
-          <NavLink to="kitchen" className={classes.link}>
+          <NavLink to="bartender" className={classes.link}>
             <BlenderIcon/>
             <ListItemText className={classes.text} primary="Kitchen" />
           </NavLink>

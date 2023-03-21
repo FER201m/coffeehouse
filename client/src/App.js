@@ -19,22 +19,6 @@ import Kitchen from "./pages/Kitchen/kitchen";
 import { useAuthContext } from "./context/authContext";
 import Login from "./pages/Login/Login";
 
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<RootLayout />}>
-//       <Route index element={<Home />} />
-//       <Route path="drinks" element={<ProductList />} />
-
-//       <Route path="order" element={<OrderLayout />}>
-//         <Route index element={<OrderOnProcess />} />
-//         <Route path="order-completed" element={<OrderCompleted />} />
-//       </Route>
-
-//       <Route path="kitchen" element={<Kitchen />} />
-//     </Route>
-//   )
-// );
-
 function App() {
   const { currentUser } = useAuthContext();
   console.log(currentUser);
