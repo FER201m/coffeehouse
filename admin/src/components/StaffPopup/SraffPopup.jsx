@@ -7,6 +7,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
 
 const style = {
     container: {
@@ -258,7 +259,7 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
                                     inputFormat="MM/DD/YYYY"
                                     renderInput={(params) => <TextField {...params} />}
                                     sx={{ width: '100%' }}
-                                    value={dob}
+                                    value={dayjs(dob)}
                                     onChange={handleChange}
                                 />
                             </LocalizationProvider>

@@ -10,10 +10,13 @@ import { toast } from 'react-toastify';
 import styles from "../CurrentOrder/CurrentOrder_Styles";
 import { useEffect, useState } from "react";
 import { formatPrice } from "~/utils/utilities";
+import { useNavigate } from "react-router-dom";
 
 
 function Payment(props) {
-  const { classes, listOrder, setListOrder,cardId, isTakeAway } = props;
+  const { classes, listOrder, setListOrder,cardId, isTakeAway, setFreeCard } = props;
+  const navigate = useNavigate(0);
+
   const [subTotal, setSubTotal] = useState(0);
   const [bill, setBill] = useState({});
 
@@ -55,6 +58,9 @@ function Payment(props) {
       console.log(res);
       toast.success('success');
       setListOrder([])
+      navigate(0);
+      // setFreeCard(prev => ([...prev, bill.cardId]))
+
     }else {
       console.log(`%c payment ${error.message} `, "color: red");
     }
