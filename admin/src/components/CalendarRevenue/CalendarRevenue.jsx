@@ -6,6 +6,7 @@ import { Calendar } from "react-calendar";
 import { format } from "date-fns";
 import { fontSize } from "@mui/system";
 import { LocalDrink, Receipt } from "@mui/icons-material";
+import useFormatMoney from '~/hooks/useFormatMoney'
 
 export default function CalendarRevenue() {
   const [dateSummary, setDateSummary] = useState({});
@@ -40,7 +41,7 @@ export default function CalendarRevenue() {
           />
           <CardContent>
             <Typography variant="h5" component="div" gutterBottom >
-              Doanh thu: {dateSummary?.revenue}
+              Doanh thu: {useFormatMoney(dateSummary?.revenue)}
             </Typography>
             <Typography variant="body1" sx={{display:"flex", alignItems:"center", mb:1}}>
             <Receipt/> Số hoá đơn: {dateSummary?.bill_quantity}

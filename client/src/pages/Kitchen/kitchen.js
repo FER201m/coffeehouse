@@ -16,6 +16,7 @@ import Paper from "@mui/material/Paper";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ModalDetail from "./ModalDetail";
 import { setTime } from "~/utils/utilities";
+import { Search } from "@mui/icons-material";
 
 const style = {
   tableHead: {
@@ -111,7 +112,7 @@ export default function Kitchen() {
                     setOrderId(dto._id);
                   }}
                 >
-                  <MoreHorizIcon sx={{ cursor: "pointer"}}/>
+                  <Search sx={{ cursor: "pointer"}}/>
                 </TableCell>
               </TableRow>
             ))}

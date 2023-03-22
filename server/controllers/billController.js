@@ -31,7 +31,7 @@ const getBills = async (req, res) => {
   try {
     const bills = await Bill.find()
       .populate("cashier_id", "fullname")
-      .populate("card_id", "_id number");
+      .populate("card_id", "_id number").sort({createdAt:-1});
     if (!bills.length) return res.status(404).send("Not available bills");
 
     // const populatedBills = await Bill.populate(bills, {
