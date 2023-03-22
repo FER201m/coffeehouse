@@ -88,7 +88,7 @@ export const Sidebar = () => {
         { id: 1, path: '/', logo: <HomeIcon />, name: 'Dashboard' },
         { id: 2, path: '/drinks', logo: <FastfoodIcon />, name: 'Drinks' },
         { id: 3, path: '/staff', logo: <PersonIcon />, name: 'Staff' },
-        { id: 4, path: '/', logo: <StyleIcon />, name: 'Card' },
+        { id: 4, path: '/cards', logo: <StyleIcon />, name: 'Card' },
     ]
 
     useEffect(() => {

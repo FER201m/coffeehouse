@@ -103,7 +103,7 @@ export default function DrinkSaleChart() {
                 },
                 title: {
                   display: true,
-                  text: "Top drink sales",
+                  text: "Món nước bán chạy",
                   position: "bottom",
                   font: {
                     size: 22,
@@ -128,7 +128,7 @@ export default function DrinkSaleChart() {
               },
               title: {
                 display: true,
-                text: "Take away percentage",
+                text: "Tỉ lệ bán mang đi",
                 position: "bottom",
                 font: {
                   size: 22,

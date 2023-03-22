@@ -125,7 +125,7 @@ export const Dashboard = () => {
       <DrinkSaleChart />
 
       {/* Summary by date */}
-      <Box maxWidth={800} style={{ margin: "10px auto" }} sx={{p:5, boxShadow:3, borderRadius:3, backgroundColor:"#fff"}}>
+      <Box width={900} style={{ margin: "10px auto" }} sx={{p:5, boxShadow:3, borderRadius:3, backgroundColor:"#fff"}}>
         <CalendarRevenue />
       </Box>
     </Stack>
