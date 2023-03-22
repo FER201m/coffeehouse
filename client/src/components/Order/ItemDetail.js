@@ -47,7 +47,6 @@ const styles = {
 function ItemDetail(props) {
   const { classes, detailDrink, billId } = props;
 
-  console.log("at item: ", detailDrink);
   return (
     <Card
       sx={{

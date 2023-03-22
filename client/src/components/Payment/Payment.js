@@ -5,10 +5,12 @@ import Box from "@mui/material/Box";
 import _ from 'lodash'
 import { addNewBill } from "~/services/apiServices";
 import { hanlderRequest } from "~/utils/utilities";
+import { toast } from 'react-toastify';
 
 import styles from "../CurrentOrder/CurrentOrder_Styles";
 import { useEffect, useState } from "react";
 import { formatPrice } from "~/utils/utilities";
+
 
 function Payment(props) {
   const { classes, listOrder, setListOrder,cardId, isTakeAway } = props;
@@ -51,9 +53,10 @@ function Payment(props) {
     const [error, res] = await hanlderRequest(addNewBill(bill))
     if(res) {
       console.log(res);
+      toast.success('success');
       setListOrder([])
     }else {
-      console.log(`%c ${error.message}`, "color: red");
+      console.log(`%c payment ${error.message} `, "color: red");
     }
   };
 

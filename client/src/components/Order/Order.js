@@ -53,7 +53,6 @@ function Order(props) {
     const fetchSpecificBill = async () => {
       const [error, res] = await hanlderRequest(getDetailBill(billId))
       if(res) {
-        console.log('specific id: ',res);
         setDetailDrink(res);
       }else {
         console.log(`%c ${error.message}`, "color: red");

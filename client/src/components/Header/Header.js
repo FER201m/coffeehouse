@@ -62,7 +62,9 @@ function Header(props) {
             Hello {currentUser.fullname}
           </Typography>
           <Typography className={classes.name} variant="caption">
-            Cashier on Phuc Long
+            {
+              currentUser.role.title === "bartender" ? "Bartender on Phuc Long" : "Cashier on Phuc Long"
+            }
           </Typography>
         </Box>
         <Button 
