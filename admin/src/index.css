@@ -16,3 +16,11 @@ html {
 body {
   margin: 0
 }
+
+.disable {
+  background-color: black
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
+}

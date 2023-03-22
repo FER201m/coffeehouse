@@ -26,7 +26,7 @@ const style = {
         backgroundColor: 'white',
         borderRadius: '5px',
         position: 'relative',
-        padding: '20px 0',
+        padding: '20px 20px',
         display: 'flex',
     },
     image: {
@@ -119,14 +119,14 @@ export const DrinkPopup = ({ drink, onClose, addNewDrinks, addUpdateDrinks }) =>
         try {
             let imgFirebaseURL = ""
             setIsLoading(true)
-            if (!drink) {
+            if (file) {
                 imgFirebaseURL = await uploadImageToFirebase(file);
             }
             // name, price, image
             const data = {
                 name: name,
                 price: price,
-                image: drink ? drink.image : imgFirebaseURL,
+                image: !file ? drink.image : imgFirebaseURL,
                 status: drink.status
             }
             const respone = drink ? await axios.put(`${ROUTER}/api/drinks/${drink._id}`, data) : await axios.post(`${ROUTER}/api/drinks`, data);

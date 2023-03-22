@@ -1,7 +1,7 @@
 import { Avatar, Box, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HomeIcon from '@mui/icons-material/Home';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import PersonIcon from '@mui/icons-material/Person';
 import StyleIcon from '@mui/icons-material/Style';
@@ -80,15 +80,21 @@ const style = {
 export const Sidebar = () => {
     const [choiceIndex, setChoiceIndex] = useState(0);
     const {logout, currentUser} = useAuthContext();
+    const location = useLocation();
 
     const onSelectRouter = (index) => setChoiceIndex(index)
 
     const selectRouter = [
-        { path: '/', logo: <HomeIcon />, name: 'Dashboard' },
-        { path: '/drinks', logo: <FastfoodIcon />, name: 'Drinks' },
-        { path: '/', logo: <PersonIcon />, name: 'Staff' },
-        { path: '/cards', logo: <StyleIcon />, name: 'Card' },
+        { id: 1, path: '/', logo: <HomeIcon />, name: 'Dashboard' },
+        { id: 2, path: '/drinks', logo: <FastfoodIcon />, name: 'Drinks' },
+        { id: 3, path: '/staff', logo: <PersonIcon />, name: 'Staff' },
+        { id: 4, path: '/', logo: <StyleIcon />, name: 'Card' },
     ]
+
+    useEffect(() => {
+        const selectTask = selectRouter.find(task => task.path === location.pathname)
+        setChoiceIndex(selectTask.id)
+    }, [location.pathname])
 
     return (
         <Box sx={style.container}>
@@ -112,7 +118,7 @@ export const Sidebar = () => {
                 {
                     selectRouter.map((router, index) => (
                         <Link to={router.path} key={uuidv4()}>
-                            <Box onClick={() => onSelectRouter(index)} sx={index == choiceIndex ? style.selectItemChoice : style.selectItem}>
+                            <Box onClick={() => onSelectRouter(index)} sx={router.id == choiceIndex ? style.selectItemChoice : style.selectItem}>
                                 <Typography sx={style.itemText}>
                                     {router.logo}
                                     {router.name}
