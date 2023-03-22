@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { formatPrice } from "~/utils/utilities";
 import { setTime } from "~/utils/utilities";
 import ItemDetail from "./ItemDetail";
+import { forEach } from "lodash";
 
 const styles = {
   card: {
@@ -42,13 +43,21 @@ function Order(props) {
       const [error, res] = await hanlderRequest(getAllBills());
       if (res) {
         const notDoneBills = res.filter(item => !item.isDone)
-        setListBills(notDoneBills);
+        const result = notDoneBills.map((bill) => {
+          let total = 0;
+          for (let i = 0; i < bill.drink_list.length; i++) {
+            total += bill.drink_list[i].quantity
+          }
+          return {...bill, totalQuantity: total}
+        })
+        setListBills(result);
       } else {
         console.log(`%c ${error.message}`, "color: red");
       }
     };
     fetchAllBills();
   }, []);
+
 
   useEffect(() => {
     const fetchSpecificBill = async () => {
@@ -97,7 +106,7 @@ function Order(props) {
                       href="#interactive-card"
                       sx={{ color: "text.tertiary" }}
                     >
-                      Table: T1
+                      Card: {bill?.card_id?.number}
                     </Link>
                   </Typography>
                   <Chip
@@ -106,7 +115,7 @@ function Order(props) {
                     size="sm"
                     sx={{ pointerEvents: "none" }}
                   >
-                    Quantity: {bill?.drink_list.length}  
+                    Quantity: {bill?.totalQuantity}  
                   </Chip>
                 </div>
                 <div className={classes.desc}>

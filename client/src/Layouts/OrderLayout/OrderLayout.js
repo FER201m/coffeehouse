@@ -1,5 +1,6 @@
 import { Outlet, NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
+import { useLocation } from "react-router-dom";
 
 import { withStyles } from "@mui/styles";
 
@@ -33,6 +34,13 @@ const styles = {
     padding: "6px 17px",
     marginLeft: '10px'
   },
+  btnActive: {
+    borderRadius: "999px",
+    backgroundColor: "#fdf0e2",
+    color: "#e4a357",
+    fontWeight: "bold",
+    padding: "6px 17px",
+  },
   mainOrder: {
     marginLeft: "20px"
   }
@@ -40,19 +48,14 @@ const styles = {
 
 function OrderLayout(props) {
   const { classes } = props;
+  const history = useLocation();
 
   return (
     <div className={classes.OrderLayout} >
       <header>
         <NavLink to="" className={classes.link}>
           <Button
-            sx={{
-              borderRadius: "999px",
-              backgroundColor: "#fdf0e2",
-              color: "#e4a357",
-              fontWeight: "bold",
-              padding: "6px 17px",
-            }}
+            sx={styles.btnActive}
           >
             On - process
           </Button>
