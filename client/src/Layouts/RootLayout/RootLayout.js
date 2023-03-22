@@ -5,8 +5,8 @@ import { withStyles } from "@mui/styles";
 import PropTypes from "prop-types";
 import { Outlet, useLocation } from "react-router-dom";
 import { useState, createContext } from "react";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // project folder
 import Navbar from "~/components/NavBar/Navbar";
@@ -22,7 +22,6 @@ function RootLayout(props) {
   const [listOrder, setListOrder] = useState([]);
   const history = useLocation();
   const { currentUser } = useAuthContext();
-
 
   return (
     <OrderContext.Provider value={{ listOrder, setListOrder }}>
@@ -52,17 +51,13 @@ function RootLayout(props) {
             <Outlet />
           </main>
           <Box className={classes.order}>
-            {
-              currentUser.role.title !== 'cashier' ? <></> : (
-                <CurrentOrder />
-              )
-            } 
+            {currentUser.role.title !== "cashier" ? <></> : <CurrentOrder />}
           </Box>
         </Box>
       </Box>
       <ToastContainer
         position="top-center"
-        autoClose={2001}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

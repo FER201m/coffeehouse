@@ -61,7 +61,7 @@ function ItemDetail(props) {
         <Typography variant="h5" sx={{color: '#ece4d8', fontSize: '18px'}}>
           Order ID
         </Typography>
-        <Typography gutterBottom className={classes.drinkID} sx={{fontSize: "20px", fontWeight: 600}}>
+        <Typography gutterBottom className={classes.drinkID} sx={{fontSize: "20px", fontWeight: 600, color: '#fff'}}>
           #{billId}
         </Typography>
       </div>
@@ -77,7 +77,7 @@ function ItemDetail(props) {
                 />
               </div>
               <div className={classes.desc}>
-                <Typography variant="h6" className={classes.drinkName}>
+                <Typography variant="h6" className={classes.drinkName} sx={{fontWeight: 600, fontSize: '19px'}}>
                   {item?.drink_id?.name}
                 </Typography>
                 <Typography

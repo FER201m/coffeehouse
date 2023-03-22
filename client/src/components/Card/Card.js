@@ -6,6 +6,7 @@ import Typography from "@mui/joy/Typography";
 import { withStyles } from "@mui/styles";
 import { useContext } from "react";
 import { OrderContext } from "~/Layouts/RootLayout/RootLayout";
+import { toast } from "react-toastify";
 
 import { formatPrice } from "~/utils/utilities";
 import styles from "./CardStyles";
@@ -19,6 +20,10 @@ function CardCofee(props) {
     listOrder.forEach((element) => {
       if (element._id === drink._id) {
         console.log("%c duplicated product", "color: red");
+        toast.error('drink added', {
+          autoClose: 1000,
+          icon: "🚀"
+        });
         isDupicated = true;
       }
     });
