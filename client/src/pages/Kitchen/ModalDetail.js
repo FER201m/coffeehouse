@@ -7,6 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import Table from "@mui/material/Table";
 import TableContainer from "@mui/material/TableContainer";
 import { Box } from "@mui/system";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   table: {
@@ -35,7 +38,18 @@ const style = {
 };
 
 function ModalDetail(props) {
-  const { handleClose, open, orderDetail } = props;
+  const { handleClose, open, orderDetail, orderId } = props;
+  const navigate = useNavigate(0);
+
+  const handleComplete =  async (id) => {
+    try {
+      await axios.put("http://localhost:8800/api/bills/complete/"+id);
+      toast.success("Complete bill")
+      navigate(0)
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <Modal
       open={open}
@@ -83,7 +97,7 @@ function ModalDetail(props) {
           </Table>
         </TableContainer>
         <br></br>
-        <Button variant="contained" sx={style.button}>
+        <Button variant="contained" sx={style.button} onClick={() => handleComplete(orderId)}>
           Xác nhận
         </Button>
       </Box>

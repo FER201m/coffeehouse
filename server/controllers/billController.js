@@ -56,7 +56,7 @@ const addNewBill = async (req, res) => {
     // drinks = [{drink_id, quantity, note}]
     const { isTakeAway, drink_list, cashier_id, card_id } = req.body;
     console.log(drink_list);
-    if (!isTakeAway || !drink_list.length || !cashier_id || !card_id)
+    if ( !drink_list.length || !cashier_id || !card_id)
       return res
         .status(400)
         .send(

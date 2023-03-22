@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Calendar } from "react-calendar";
 import { format } from "date-fns";
 import { fontSize } from "@mui/system";
+import { LocalDrink, Receipt } from "@mui/icons-material";
 
 export default function CalendarRevenue() {
   const [dateSummary, setDateSummary] = useState({});
@@ -27,7 +28,7 @@ export default function CalendarRevenue() {
   }, [date]);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} maxWidth={700} style={{ margin: "10px auto" }}>
       <Grid xs={6} lg={7}>
         <Calendar onChange={setDate} value={date} />
       </Grid>
@@ -38,14 +39,14 @@ export default function CalendarRevenue() {
             title={`Tổng kết ngày ${format(new Date(date), "dd/MM/yyyy")}`}
           />
           <CardContent>
-            <Typography variant="h5" component="div" gutterBottom>
+            <Typography variant="h5" component="div" gutterBottom >
               Doanh thu: {dateSummary?.revenue}
             </Typography>
-            <Typography variant="body1">
-              Số hoá đơn: {dateSummary?.bill_quantity}
+            <Typography variant="body1" sx={{display:"flex", alignItems:"center", mb:1}}>
+            <Receipt/> Số hoá đơn: {dateSummary?.bill_quantity}
             </Typography>
-            <Typography variant="body1">
-              Số ly nước: {dateSummary?.cup_quantity}
+            <Typography variant="body1" sx={{display:"flex", alignItems:"center"}}>
+             <LocalDrink/> Số ly nước: {dateSummary?.cup_quantity}
             </Typography>
           </CardContent>
         </Card>

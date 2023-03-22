@@ -185,6 +185,7 @@ function CurrentOrder(props) {
         cardId={cardNumber}
         isTakeAway={isTakeAway}
         setListOrder={setListOrder}
+        // setFreeCard={setFreeCard}
       />
     </>
   );

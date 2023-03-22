@@ -41,7 +41,8 @@ function Order(props) {
     const fetchAllBills = async () => {
       const [error, res] = await hanlderRequest(getAllBills());
       if (res) {
-        setListBills(res);
+        const notDoneBills = res.filter(item => !item.isDone)
+        setListBills(notDoneBills);
       } else {
         console.log(`%c ${error.message}`, "color: red");
       }

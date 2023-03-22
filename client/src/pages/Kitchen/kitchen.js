@@ -29,12 +29,14 @@ export default function Kitchen() {
   const handleClose = () => setOpen(false);
   const [Order, setOrder] = useState([]);
   const [orderDetail, setOrderDetail] = useState([]);
+  const [orderId, setOrderId] = useState();
 
   useEffect(() => {
     fetch("http://localhost:8800/api/bills")
       .then((response) => response.json())
       .then((data) => {
-        setOrder(data);
+        const notDoneBills = data.filter(item => !item.isDone)
+        setOrder(notDoneBills);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -106,6 +108,7 @@ export default function Kitchen() {
                   align="center"
                   onClick={() => {
                     showDetail(dto._id);
+                    setOrderId(dto._id);
                   }}
                 >
                   <MoreHorizIcon sx={{ cursor: "pointer"}}/>
@@ -120,6 +123,7 @@ export default function Kitchen() {
         handleClose={handleClose}
         open={open}
         orderDetail={orderDetail}
+        orderId={orderId}
       />
     </div>
   );

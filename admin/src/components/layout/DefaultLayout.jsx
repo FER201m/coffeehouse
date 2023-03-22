@@ -8,7 +8,7 @@ function DefaultLayout({ children }) {
             <Grid item xs={2} >
                 <Sidebar />
             </Grid>
-            <Grid item xs={10} sx={{ width: '100%', backgroundColor: '#f3f1ef' }}>
+            <Grid item xs={10} sx={{ width: '100%', backgroundColor: '#f3f1ef', paddingRight: '20px' }}>
                 {children}
             </Grid>
         </Grid>
