@@ -1,7 +1,7 @@
 import { withStyles } from "@mui/styles";
 import Grid from "@mui/material/Grid";
 
-import Order from "~/components/Order/Order";
+import Order from "~/components/OrderOnprocess/Order";
 
 const styles = {
   wrapper: {

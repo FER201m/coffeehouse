@@ -6,6 +6,7 @@ import _ from 'lodash'
 import { addNewBill } from "~/services/apiServices";
 import { hanlderRequest } from "~/utils/utilities";
 import { toast } from 'react-toastify';
+import { useAuthContext } from "~/context/authContext";
 
 import styles from "../CurrentOrder/CurrentOrder_Styles";
 import { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ function Payment(props) {
 
   const [subTotal, setSubTotal] = useState(0);
   const [bill, setBill] = useState({});
+  const { currentUser } = useAuthContext();
 
   useEffect(() => {
     const result = listOrder.reduce((acc, curValue) => {
@@ -33,7 +35,7 @@ function Payment(props) {
     const cloneListOrder = _.cloneDeep(listOrder);
     const data = {
       isTakeAway: isTakeAway,
-      cashier_id: "64109c6e2c229db3d40db2c2",
+      cashier_id: currentUser._id,
       card_id: cardId,
       drink_list: cloneListOrder.map((order) => {
         if (order._id) {
