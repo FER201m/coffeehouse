@@ -9,6 +9,7 @@ const styles = {
   },
   navigation: {
     gridArea: "nav",
+    background: '#624321'
   },
   productList: {
     background: "#fafafa",

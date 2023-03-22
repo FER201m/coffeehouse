@@ -13,8 +13,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
-import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { toast } from 'react-toastify';
 
 import { OrderContext } from "~/Layouts/RootLayout/RootLayout";
 import styles from "./CurrentOrder_Styles";
@@ -64,6 +64,10 @@ function CurrentOrder(props) {
         case "minus":
           if (item) {
             item.quantity = item.quantity - 1;
+            if(item.quantity < 1) {
+              toast.error('minimum is 1');
+              return;
+            }
           }
           break;
         case "plus":

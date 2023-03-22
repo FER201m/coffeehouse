@@ -18,22 +18,7 @@ import OrderCompleted from "./pages/Order/OrderCompleted";
 import Kitchen from "./pages/Kitchen/kitchen";
 import { useAuthContext } from "./context/authContext";
 import Login from "./pages/Login/Login";
-
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<RootLayout />}>
-//       <Route index element={<Home />} />
-//       <Route path="drinks" element={<ProductList />} />
-
-//       <Route path="order" element={<OrderLayout />}>
-//         <Route index element={<OrderOnProcess />} />
-//         <Route path="order-completed" element={<OrderCompleted />} />
-//       </Route>
-
-//       <Route path="kitchen" element={<Kitchen />} />
-//     </Route>
-//   )
-// );
+import Notfound from "./pages/NotFound/Notfound";
 
 function App() {
   const { currentUser } = useAuthContext();
@@ -45,15 +30,20 @@ function App() {
           <Route index element={<Home />} />
           <Route path="drinks" element={<ProductList />} />
 
-          <Route path="order" element={<OrderLayout />}>
-            <Route index element={<OrderOnProcess />} />
-            <Route path="order-completed" element={<OrderCompleted />} />
-          </Route>
+          {
+            currentUser.role.title === "cashier" && (
+              <Route path="order" element={<OrderLayout />}>
+                <Route index element={<OrderOnProcess />} />
+                <Route path="order-completed" element={<OrderCompleted />} />
+              </Route>
+            )
+          }
 
           <Route path="bartender" element={<Kitchen />} />
         </Route>
       )}
       {!currentUser && <Route path="/" element={<Login />} />}
+      <Route path="*" element={<Notfound/>} />
     </Routes>
   );
 }

@@ -12,19 +12,17 @@ import { useState, useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
-import Pagination from "@mui/material/Pagination";
-import moment from "moment";
+import Paper from "@mui/material/Paper";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import ModalDetail from "./ModalDetail";
+import { setTime } from "~/utils/utilities";
+
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "800px",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+  tableHead: {
+    fontWeight: 600
+  }
+}
+
 export default function Kitchen() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -48,7 +46,7 @@ export default function Kitchen() {
         setOrderDetail(data);
       })
       .catch((error) => console.error(error));
-    console.log(orderDetail);
+    console.log({ orderDetail });
     return handleOpen();
   }
 
@@ -62,118 +60,67 @@ export default function Kitchen() {
 
     return totalDrinks;
   }
- 
-  function setTime(dateString) {
-    const formattedTime = moment(dateString).format("HH:mm");
-    return <div>{formattedTime}</div>;
-  }
-
+  
   return (
     <div>
       <TableContainer
         sx={{
-          width: "65%",
+          width: "75%",
           padding: 1,
           marginLeft: "auto",
           marginRight: "auto",
-          border: " 1px solid #666",
         }}
+        component={Paper}
       >
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center">Card</TableCell>
-              <TableCell align="center">Cashier</TableCell>
-              <TableCell align="center">Quantity</TableCell>
-              <TableCell align="center">Time</TableCell>
-              <TableCell align="center">Take away</TableCell>
-              <TableCell align="center">Total Order</TableCell>
+              <TableCell align="center" sx={style.tableHead}>Card</TableCell>
+              <TableCell align="center" sx={style.tableHead}>Cashier</TableCell>
+              <TableCell align="center" sx={style.tableHead}>Quantity</TableCell>
+              <TableCell align="center" sx={style.tableHead}>Time</TableCell>
+              <TableCell align="center" sx={style.tableHead}>Take away</TableCell>
+              {/* <TableCell align="center">Total Order</TableCell> */}
+              <TableCell align="center" sx={style.tableHead}>Detail</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {Order.map((dto) => (
               <TableRow
                 key={dto._id}
-                onClick={() => {
-                  showDetail(dto._id);
-                }}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell align="center">{dto.card_id.number}</TableCell>
                 <TableCell align="center">{dto.cashier_id?.fullname}</TableCell>
                 <TableCell align="center">{totalDrink(dto._id)}</TableCell>
                 <TableCell align="center">{setTime(dto.date)}</TableCell>
-
                 <TableCell align="center">
                   {dto.isTakeAway ? (
-                    <CheckIcon style={{ color: "green", cursor: 'pointer' }} />
+                    <CheckIcon style={{ color: "green"}} />
                   ) : (
-                    <CloseIcon style={{ color: "red", cursor: 'pointer' }} />
+                    <CloseIcon style={{ color: "red"}} />
                   )}
                 </TableCell>
-
-                <TableCell align="center">{dto.total_price}</TableCell>
+                {/* <TableCell align="center">{dto.total_price}</TableCell> */}
+                <TableCell
+                  align="center"
+                  onClick={() => {
+                    showDetail(dto._id);
+                  }}
+                >
+                  <MoreHorizIcon sx={{ cursor: "pointer"}}/>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
-      
         </Table>
       </TableContainer>
 
-      <Modal
+      <ModalDetail
+        handleClose={handleClose}
         open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        sx={{ width: "800px", marginLeft: "auto", marginRight: "auto" }}
-      >
-        <Box sx={style}>
-          <TableContainer
-            sx={{
-              width: "800px",
-              padding: 1,
-
-              marginLeft: "auto",
-              marginRight: "auto",
-              border: " 1px solid #666",
-            }}
-          >
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center" sx={{ fontWeight: "600" }}>
-                    Image
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "600" }}>
-                    Name
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "600" }}>
-                    Quantity
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "600" }}>
-                    Note
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {orderDetail.map((odl) => (
-                  <TableRow>
-                    <TableCell align="center">
-                      <img src={odl.drink_id.image} style={{ width: "50px" }} />
-                    </TableCell>
-                    <TableCell align="center">{odl.drink_id.name}</TableCell>
-                    <TableCell align="center">{odl.quantity}</TableCell>
-                    <TableCell align="center">
-                      {odl.note ?? "XXXXXXX"}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <br></br>
-          <Button variant="contained">Xác nhận</Button>
-        </Box>
-      </Modal>
+        orderDetail={orderDetail}
+      />
     </div>
   );
 }

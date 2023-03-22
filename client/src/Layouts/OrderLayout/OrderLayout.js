@@ -10,7 +10,20 @@ const styles = {
   OrderLayout: {
     backgroundColor: '#fafafa',
     gridArea: "mainContent",
-    padding: '10px 30px'
+    padding: '10px 30px',
+    overflow: 'auto',
+    height: "100vh",
+    overscrollBehavior: "contain",
+    '&::-webkit-scrollbar': {
+      width: '10px',
+    },
+    '&::-webkit-scrollbar-track': {
+      background: '#f1f1f1',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: '#d29232',
+      borderRadius: '8px'
+    },
   },
   btn: {
     borderRadius: "999px",
@@ -19,6 +32,9 @@ const styles = {
     fontWeight: "bold",
     padding: "6px 17px",
     marginLeft: '10px'
+  },
+  mainOrder: {
+    marginLeft: "20px"
   }
 };
 
@@ -26,7 +42,7 @@ function OrderLayout(props) {
   const { classes } = props;
 
   return (
-    <div className={classes.OrderLayout}>
+    <div className={classes.OrderLayout} >
       <header>
         <NavLink to="" className={classes.link}>
           <Button
@@ -49,7 +65,7 @@ function OrderLayout(props) {
           </Button>
         </NavLink>
       </header>
-      <main>
+      <main className={classes.mainOrder}>
         <Outlet />
       </main>
     </div>

@@ -2,6 +2,8 @@ var express = require("express");
 const { getStatistics, getTopSaleDrinks, getTakeAwayBillPercentage, getSummaryByDate } = require("../controllers/statisticsController");
 var router = express.Router();
 
+
+
 // Get available drinks - cashier get
 router.get("/", getStatistics);
 
