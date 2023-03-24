@@ -5,7 +5,7 @@ const getAvailableDrinks = async (req, res) => {
     const drinks = await Drink.find(
       { status: true },
       { status: 0, updatedAt: 0, createdAt: 0 }
-    );
+    )
     if (!drinks.length) return res.status(404).send("Not available drinks");
     return res.status(200).json(drinks);
   } catch (err) {
@@ -15,7 +15,7 @@ const getAvailableDrinks = async (req, res) => {
 
 const getDrinks = async (req, res) => {
   try {
-    const drinks = await Drink.find();
+    const drinks = await Drink.find().sort([['status', -1]])
     if (!drinks.length) return res.status(404).send("No drinks");
     return res.status(200).json(drinks);
   } catch (err) {
