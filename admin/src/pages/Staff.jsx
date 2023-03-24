@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import SettingsIcon from '@mui/icons-material/Settings';
-
+import { toast } from "react-toastify";
 import ROUTER from '~/api/server';
 import SraffPopup from '~/components/StaffPopup/SraffPopup';
 const style = {
@@ -93,11 +93,19 @@ function Staff() {
         }
     }
 
-    const onUpdateStatusStaff = (status, user_id) => {
-        const userTmp = [...Staff];
-        const updateIndex = userTmp.findIndex(staff => staff._id == user_id)
-        userTmp[updateIndex].status = status;
-        setStaff(userTmp);
+    const onUpdateStatusStaff = async (status, user_id) => {
+        try {
+            const userTmp = [...Staff];
+            const updateIndex = userTmp.findIndex(staff => staff._id == user_id)
+            userTmp[updateIndex].status = status;
+            setStaff(userTmp);
+            const result = await axios.post(`http://localhost:8800/api/users/staff/status/${user_id}`, { status: status })
+            toast.success("Disable Success!");
+        }
+        catch (error) {
+            toast.error("Disable Error!");
+
+        }
     }
 
     const columns = [

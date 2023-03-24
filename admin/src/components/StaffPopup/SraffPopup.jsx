@@ -7,6 +7,10 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { v4 as uuidv4 } from 'uuid';
+import MomentUtils from "@date-io/moment";
+import dayjs from 'dayjs';
+import { toast } from "react-toastify";
+import axios from 'axios';
 
 const style = {
     container: {
@@ -111,7 +115,9 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
     const [file, setFile] = useState()
     const [isLoading, setIsLoading] = useState(false);
 
-    const onUpdateStaff = () => {
+    console.log(user);
+
+    const onUpdateStaff = async () => {
         const data = {
             fullname: name,
             email: email,
@@ -122,7 +128,18 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
             dob: dob,
             id: user.id,
             _id: user._id,
-            status: true
+            status: true,
+            avatar: user ? user.avatar : "https://th.bing.com/th/id/R.fa62247ebf75fea31e055c79dffad9d9?rik=j9%2fx5lHZXxx%2bpg&pid=ImgRaw&r=0"
+        }
+
+        try {
+            if (!user || !name || !email || !phone || !address || !gender || !role || !dob) return toast.error("Update error");
+            const result = await axios.put(`http://localhost:8800/api/users/${user.id}`, data)
+            if (result) {
+                toast.success("Update Success!");
+            }
+        } catch (e) {
+            toast.error("Update Error!");
         }
 
         const userTmp = [...Staff];
@@ -136,35 +153,41 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
         setdob(newValue);
     };
 
-    const handleChangeGender = (event) => {
-        console.log(event.target.value)
-        setGender(event.target.value);
-    };
-
     const handleChangeRole = (event) => {
         console.log(event.target.value)
         setRole(event.target.value);
     };
 
-    const onAddNewStaff = () => {
-        const id = uuidv4()
-        const data = {
-            fullname: name,
-            email: email,
-            phone: phone,
-            address: address,
-            gender: gender,
-            role: role,
-            dob: dob,
-            id: user ? user.id : id,
-            _id: user ? user.id : id,
-            status: true
+    const onAddNewStaff = async () => {
+        try {
+            const data = {
+                fullname: name,
+                email: email,
+                phone: phone,
+                address: address,
+                gender: gender,
+                role: role,
+                dob: dob,
+                status: true
+            }
+
+            const result = await axios.post("http://localhost:8800/api/users", data)
+
+            if (result) {
+                const user = result.data
+                const newdata = {
+                    ...user,
+                    id: user._id,
+                }
+                setStaff(staff => [...staff, newdata])
+                toast.success("Create Success!")
+            }
+
+
+        } catch (error) {
+            toast.error("Create Error!")
         }
-
-        setStaff(staff => [...staff, data])
     }
-
-
 
     return (
         <Box sx={style.container}>
@@ -173,10 +196,7 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
                     <Box sx={style.content} >
                         {
                             !avatar ?
-                                <label label className="hover" style={style.inputFile}>
-                                    <AddIcon style={style.icon} />
-                                    <input type="file" style={{ display: 'none' }} id="file-upload" />
-                                </label>
+                                <img src="https://th.bing.com/th/id/R.fa62247ebf75fea31e055c79dffad9d9?rik=j9%2fx5lHZXxx%2bpg&pid=ImgRaw&r=0" style={style.image} alt="" />
                                 :
                                 <img src={avatar} style={style.image} alt="" />
                         }
@@ -245,9 +265,9 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
                                     defaultValue={role}
                                     onChange={handleChangeRole}
                                 >
-                                    <MenuItem value="admin">Admin</MenuItem>
-                                    <MenuItem value="cashier">Cashier</MenuItem>
-                                    <MenuItem value="bartender">Bartender</MenuItem>
+                                    <MenuItem value="64108fb6c8d63c0206dccb9b">Admin</MenuItem>
+                                    <MenuItem value="64108feac8d63c0206dccb9c">Cashier</MenuItem>
+                                    <MenuItem value="64188aa6aa98522597d9f721">Bartender</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>
@@ -258,7 +278,7 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
                                     inputFormat="MM/DD/YYYY"
                                     renderInput={(params) => <TextField {...params} />}
                                     sx={{ width: '100%' }}
-                                    value={dob}
+                                    value={dayjs(dob)}
                                     onChange={handleChange}
                                 />
                             </LocalizationProvider>
