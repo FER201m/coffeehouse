@@ -49,7 +49,7 @@ export const Dashboard = () => {
               avatar={<Group fontSize="large" />}
               title={
                 <Typography fontWeight={500} fontSize={20} variant="subtitle1">
-                  Staff
+                  Nhân viên
                 </Typography>
               }
             />
@@ -77,7 +77,7 @@ export const Dashboard = () => {
               avatar={<LocalDrink fontSize="large" />}
               title={
                 <Typography fontWeight={500} fontSize={20} variant="subtitle1">
-                  Drinks
+                  Món nước
                 </Typography>
               }
             />
@@ -104,7 +104,7 @@ export const Dashboard = () => {
               avatar={<Style fontSize="large" />}
               title={
                 <Typography fontWeight={500} fontSize={20} variant="subtitle1">
-                  Cards
+                  Thẻ
                 </Typography>
               }
             />

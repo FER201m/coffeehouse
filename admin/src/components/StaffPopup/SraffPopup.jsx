@@ -264,9 +264,9 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
                                     defaultValue={role}
                                     onChange={handleChangeRole}
                                 >
-                                    <MenuItem value="64108fb6c8d63c0206dccb9b">Admin</MenuItem>
                                     <MenuItem value="64108feac8d63c0206dccb9c">Cashier</MenuItem>
                                     <MenuItem value="64188aa6aa98522597d9f721">Bartender</MenuItem>
+                                    <MenuItem value="641e61b14db656b1362e1abf">Waiter</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>
