@@ -93,7 +93,7 @@ export default function Kitchen() {
                 key={dto._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell align="center">{dto.card_id.number}</TableCell>
+                <TableCell align="center">{dto?.card_id?.number}</TableCell>
                 <TableCell align="center">{dto.cashier_id?.fullname}</TableCell>
                 <TableCell align="center">{totalDrink(dto._id)}</TableCell>
                 <TableCell align="center">{setTime(dto.date)}</TableCell>

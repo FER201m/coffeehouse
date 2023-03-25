@@ -1,22 +1,16 @@
-import {
-  Box,
-  CircularProgress,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Zoom,
-} from "@mui/material";
-import React, { useState } from "react";
-import useFormatMoney from "~/hooks/useFormatMoney";
-import AddIcon from "@mui/icons-material/Add";
-import CloseIcon from "@mui/icons-material/Close";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { v4 as uuidv4 } from "uuid";
-import dayjs from "dayjs";
+import { Box, CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField, Zoom } from '@mui/material'
+import React, { useState } from 'react'
+import useFormatMoney from '~/hooks/useFormatMoney';
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { v4 as uuidv4 } from 'uuid';
+import MomentUtils from "@date-io/moment";
+import dayjs from 'dayjs';
+import { toast } from "react-toastify";
+import axios from 'axios';
 
 const style = {
   container: {
@@ -120,187 +114,192 @@ function SraffPopup({ user, onClose, setStaff, Staff }) {
   const [file, setFile] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  const onUpdateStaff = () => {
-    const data = {
-      fullname: name,
-      email: email,
-      phone: phone,
-      address: address,
-      gender: gender,
-      role: role,
-      dob: dob,
-      id: user.id,
-      _id: user._id,
-      status: true,
+    console.log(user);
+
+    const onUpdateStaff = async () => {
+        const data = {
+            fullname: name,
+            email: email,
+            phone: phone,
+            address: address,
+            gender: gender,
+            role: role,
+            dob: dob,
+            id: user.id,
+            _id: user._id,
+            status: true,
+            avatar: user ? user.avatar : "https://th.bing.com/th/id/R.fa62247ebf75fea31e055c79dffad9d9?rik=j9%2fx5lHZXxx%2bpg&pid=ImgRaw&r=0"
+        }
+
+        try {
+            if (!user || !name || !email || !phone || !address || !gender || !role || !dob) return toast.error("Update error");
+            const result = await axios.put(`http://localhost:8800/api/users/${user.id}`, data)
+            if (result) {
+                toast.success("Update Success!");
+            }
+        } catch (e) {
+            toast.error("Update Error!");
+        }
+
+        const userTmp = [...Staff];
+        const updateIndex = userTmp.findIndex(staff => staff._id == user._id)
+        userTmp[updateIndex] = data;
+        console.log(userTmp[updateIndex])
+        setStaff(userTmp);
+    }
+
+    const handleChange = (newValue) => {
+        setdob(newValue);
     };
 
-    const userTmp = [...Staff];
-    const updateIndex = userTmp.findIndex((staff) => staff._id == user._id);
-    userTmp[updateIndex] = data;
-    console.log(userTmp[updateIndex]);
-    setStaff(userTmp);
-  };
-
-  const handleChange = (newValue) => {
-    setdob(newValue);
-  };
-
-  const handleChangeGender = (event) => {
-    console.log(event.target.value);
-    setGender(event.target.value);
-  };
-
-  const handleChangeRole = (event) => {
-    console.log(event.target.value);
-    setRole(event.target.value);
-  };
-
-  const onAddNewStaff = () => {
-    const id = uuidv4();
-    const data = {
-      fullname: name,
-      email: email,
-      phone: phone,
-      address: address,
-      gender: gender,
-      role: role,
-      dob: dob,
-      id: user ? user.id : id,
-      _id: user ? user.id : id,
-      status: true,
+    const handleChangeRole = (event) => {
+        console.log(event.target.value)
+        setRole(event.target.value);
     };
 
-    setStaff((staff) => [...staff, data]);
-  };
+    const onAddNewStaff = async () => {
+        try {
+            const data = {
+                fullname: name,
+                email: email,
+                phone: phone,
+                address: address,
+                gender: gender,
+                role: role,
+                dob: dob,
+                status: true
+            }
 
-  return (
-    <Box sx={style.container}>
-      <Zoom in={true}>
-        <Box sx={style.box}>
-          <Box sx={style.content}>
-            {!avatar ? (
-              <img
-                src="https://th.bing.com/th/id/R.fa62247ebf75fea31e055c79dffad9d9?rik=j9%2fx5lHZXxx%2bpg&pid=ImgRaw&r=0"
-                style={style.image}
-                alt=""
-              />
-            ) : (
-              <img src={avatar} style={style.image} alt="" />
-            )}
-            <TextField
-              id="standard-password-input"
-              label="Fullname"
-              type="text"
-              variant="standard"
-              sx={{ width: "300px" }}
-              defaultValue={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-              id="standard-password-input"
-              label="Email"
-              variant="standard"
-              sx={{ width: "300px" }}
-              defaultValue={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            const result = await axios.post("http://localhost:8800/api/users", data)
 
-            <TextField
-              id="standard-password-input"
-              label="Phone"
-              type="number"
-              autoComplete="current-password"
-              variant="standard"
-              sx={{ width: "300px" }}
-              defaultValue={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
+            if (result) {
+                const user = result.data
+                const newdata = {
+                    ...user,
+                    id: user._id,
+                }
+                setStaff(staff => [...staff, newdata])
+                toast.success("Create Success!")
+            }
 
-            <TextField
-              id="standard-password-input"
-              label="Address"
-              autoComplete="current-password"
-              variant="standard"
-              sx={{ width: "300px" }}
-              defaultValue={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-            <Box sx={{ width: "300px", display: "flex", gap: "10px" }}>
-              <FormControl sx={{ width: "50%" }}>
-                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Age"
-                  defaultValue={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                >
-                  <MenuItem value="male">Male</MenuItem>
-                  <MenuItem value="female">Female</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl sx={{ width: "50%" }}>
-                <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Age"
-                  defaultValue={role}
-                  onChange={handleChangeRole}
-                >
-                  <MenuItem value="admin">Admin</MenuItem>
-                  <MenuItem value="cashier">Cashier</MenuItem>
-                  <MenuItem value="bartender">Bartender</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={{ width: "100%", display: "flex" }}>
-              <LocalizationProvider
-                dateAdapter={AdapterDayjs}
-                sx={{ width: "100%" }}
-              >
-                <DesktopDatePicker
-                  label="Date of birth    "
-                  inputFormat="MM/DD/YYYY"
-                  renderInput={(params) => <TextField {...params} />}
-                  sx={{ width: "100%" }}
-                  value={dayjs(dob)}
-                  onChange={handleChange}
-                />
-              </LocalizationProvider>
-            </Box>
-            {isLoading ? (
-              <Box sx={{ height: "100px", width: "100px" }}>
-                <CircularProgress />
-              </Box>
-            ) : user ? (
-              <button
-                onClick={onUpdateStaff}
-                className="hover"
-                style={style.button}
-              >
-                Save
-              </button>
-            ) : (
-              <button
-                onClick={onAddNewStaff}
-                className="hover"
-                style={style.button}
-              >
-                Save
-              </button>
-            )}
-          </Box>
-          <CloseIcon
-            className="hover"
-            onClick={() => onClose(null)}
-            style={style.icons}
-          />
+
+        } catch (error) {
+            toast.error("Create Error!")
+        }
+    }
+
+    return (
+        <Box sx={style.container}>
+            <Zoom in={true}>
+                <Box sx={style.box}>
+                    <Box sx={style.content} >
+                        {
+                            !avatar ?
+                                <img src="https://th.bing.com/th/id/R.fa62247ebf75fea31e055c79dffad9d9?rik=j9%2fx5lHZXxx%2bpg&pid=ImgRaw&r=0" style={style.image} alt="" />
+                                :
+                                <img src={avatar} style={style.image} alt="" />
+                        }
+                        <TextField
+                            id="standard-password-input"
+                            label="Fullname"
+                            type="text"
+                            variant="standard"
+                            sx={{ width: "300px" }}
+                            defaultValue={name}
+                            onChange={e => setName(e.target.value)}
+                        />
+                        <TextField
+                            id="standard-password-input"
+                            label="Email"
+                            variant="standard"
+                            sx={{ width: "300px" }}
+                            defaultValue={email}
+                            onChange={e => setEmail(e.target.value)}
+
+                        />
+
+                        <TextField
+                            id="standard-password-input"
+                            label="Phone"
+                            type="number"
+                            autoComplete="current-password"
+                            variant="standard"
+                            sx={{ width: "300px" }}
+                            defaultValue={phone}
+                            onChange={e => setPhone(e.target.value)}
+
+                        />
+
+                        <TextField
+                            id="standard-password-input"
+                            label="Address"
+                            autoComplete="current-password"
+                            variant="standard"
+                            sx={{ width: "300px" }}
+                            defaultValue={address}
+                            onChange={e => setAddress(e.target.value)}
+
+                        />
+                        <Box sx={{ width: "300px", display: "flex", gap: '10px' }}>
+                            <FormControl sx={{ width: "50%" }}>
+                                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    label="Age"
+                                    defaultValue={gender}
+                                    onChange={e => setGender(e.target.value)}
+                                >
+                                    <MenuItem value="male">Male</MenuItem>
+                                    <MenuItem value='female'>Female</MenuItem>
+                                    <MenuItem value='other'>Other</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl sx={{ width: "50%" }}>
+                                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    label="Age"
+                                    defaultValue={role}
+                                    onChange={handleChangeRole}
+                                >
+                                    <MenuItem value="64108fb6c8d63c0206dccb9b">Admin</MenuItem>
+                                    <MenuItem value="64108feac8d63c0206dccb9c">Cashier</MenuItem>
+                                    <MenuItem value="64188aa6aa98522597d9f721">Bartender</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                        <Box sx={{ width: "100%", display: "flex" }}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ width: "100%" }}>
+                                <DesktopDatePicker
+                                    label="Date of birth    "
+                                    inputFormat="MM/DD/YYYY"
+                                    renderInput={(params) => <TextField {...params} />}
+                                    sx={{ width: '100%' }}
+                                    value={dayjs(dob)}
+                                    onChange={handleChange}
+                                />
+                            </LocalizationProvider>
+                        </Box>
+                        {
+                            isLoading ?
+                                <Box sx={{ height: "100px", width: "100px" }} >
+                                    <CircularProgress />
+                                </Box>
+                                :
+                                user ?
+                                    <button onClick={onUpdateStaff} className="hover" style={style.button}>Save</button>
+                                    :
+                                    <button onClick={onAddNewStaff} className="hover" style={style.button}>Save</button>
+
+                        }
+                    </Box>
+                    <CloseIcon className="hover" onClick={() => onClose(null)} style={style.icons} />
+                </Box>
+            </Zoom>
         </Box>
-      </Zoom>
-    </Box>
-  );
+    )
 }
 
 export default SraffPopup;
