@@ -28,15 +28,9 @@ function Navbar(props) {
         }}
       />
       <List>
-        <ListItem className={classes.listItem}>
-          <NavLink to="/" className={classes.link}>
-            <HomeRoundedIcon />
-            <ListItemText className={classes.text} primary="Home" />
-          </NavLink>
-        </ListItem>
         {currentUser.role.title === "cashier" && (
           <ListItem className={classes.listItem}>
-            <NavLink to="drinks" className={classes.link}>
+            <NavLink to="/" className={classes.link}>
               <ViewListRoundedIcon />
               <ListItemText className={classes.text} primary="Table" />
             </NavLink>

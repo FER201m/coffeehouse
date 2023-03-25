@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
-import Typography from "@mui/joy/Typography";
+import { Typography } from "@mui/material";
 import { withStyles } from "@mui/styles";
 import { useContext } from "react";
 import { OrderContext } from "~/Layouts/RootLayout/RootLayout";
@@ -19,17 +19,16 @@ function CardCofee(props) {
     let isDupicated = false;
     listOrder.forEach((element) => {
       if (element._id === drink._id) {
-        console.log("%c duplicated product", "color: red");
-        toast.error('drink added', {
+        toast.error("drink added", {
           autoClose: 1000,
-          icon: "🚀"
+          icon: "🍵",
         });
         isDupicated = true;
       }
     });
-    if(!isDupicated) {
+    if (!isDupicated) {
       setListOrder((prev) => {
-        return [...prev, {...drink, quantity: 1, note: ''}]; 
+        return [...prev, { ...drink, quantity: 1, note: "" }];
       });
     }
   };
@@ -43,7 +42,7 @@ function CardCofee(props) {
         className={classes.imgProduct}
       />
       <Box sx={{ height: "140px" }}></Box>
-      <Box className={classes.sellOff}>
+      {/* <Box className={classes.sellOff}>
         <Typography
           variant="h6"
           sx={{ color: "#ffff", fontWeight: "bold", marginLeft: "3px" }}
@@ -56,13 +55,20 @@ function CardCofee(props) {
         >
           off
         </Typography>
-      </Box>
+      </Box> */}
       <Box className={classes.desc}>
-        <Typography variant="h6" fontWeight="lg" gutterBottom>
+        <Typography
+          variant="h6"
+          
+        > 
           {drink.name}
         </Typography>
-        <Typography fontSize="lg" gutterBottom>
-          {formatPrice(drink.price)}
+        <Typography
+          fontSize="lg"
+          gutterBottom
+          sx={{ fontWeight: 500, color: "#0C713D" }}
+        >
+          {formatPrice(drink.price)} đ
         </Typography>
       </Box>
       <Button

@@ -14,7 +14,7 @@ import Select from "@mui/material/Select";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 import { OrderContext } from "~/Layouts/RootLayout/RootLayout";
 import styles from "./CurrentOrder_Styles";
@@ -63,11 +63,14 @@ function CurrentOrder(props) {
           break;
         case "minus":
           if (item) {
-            item.quantity = item.quantity - 1;
-            if(item.quantity < 1) {
-              toast.error('minimum is 1');
+            if (item.quantity <= 1) {
+              toast.error("min is 1", {
+                icon: "⚠️",
+                autoClose: 1000,
+              });
               return;
             }
+            item.quantity = item.quantity - 1;
           }
           break;
         case "plus":
@@ -99,7 +102,17 @@ function CurrentOrder(props) {
               />
               <Box className={classes.desc}>
                 <Box>
-                  <Typography level="h2" fontSize="md" id="card-description">
+                  <Typography
+                    sx={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 1,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                    level="h2"
+                    fontSize="md"
+                    id="card-description"
+                  >
                     {orderItem.name}
                   </Typography>
                 </Box>
@@ -144,8 +157,16 @@ function CurrentOrder(props) {
         );
       })}
       <Box sx={{ my: 3, mx: "auto" }}>
-        <FormControl sx={{ minWidth: 78, borderRadius: '8px' }} size="small">
-          <InputLabel htmlFor="grouped-native-select">Card</InputLabel>
+        <FormControl
+          sx={{
+            minWidth: 78,
+            borderRadius: "8px",
+          }}
+          size="small"
+        >
+          <InputLabel htmlFor="grouped-native-select" sx={{ color: "#fff" }}>
+            Card
+          </InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="grouped-native-select"
@@ -153,6 +174,11 @@ function CurrentOrder(props) {
             onChange={handleChange}
             displayEmpty
             label="Card"
+            sx={{
+              "& .MuiSelect-icon": {
+                color: "#ffff",
+              },
+            }}
           >
             {freeCard?.map((card) => {
               return (
@@ -173,7 +199,7 @@ function CurrentOrder(props) {
                 "&.Mui-checked": {
                   color: "#ffffff",
                 },
-                ml: 3
+                ml: 3,
               }}
             />
           }
