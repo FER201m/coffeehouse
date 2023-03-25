@@ -58,7 +58,9 @@ function Payment(props) {
     const [error, res] = await hanlderRequest(addNewBill(bill))
     if(res) {
       console.log(res);
-      toast.success('success');
+      toast.success('success', {
+        icon: "✅"
+      });
       setListOrder([])
       navigate(0);
       // setFreeCard(prev => ([...prev, bill.cardId]))

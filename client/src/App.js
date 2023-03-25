@@ -27,8 +27,7 @@ function App() {
     <Routes>
       {currentUser && (
         <Route path="/" element={<RootLayout />}>
-          <Route index element={<Home />} />
-          <Route path="drinks" element={<ProductList />} />
+          <Route index element={<ProductList />} />
 
           {
             currentUser.role.title === "cashier" && (
