@@ -37,7 +37,7 @@ export default function AuthContextProvider({ children }) {
       if (res.data.role?.title === "bartender") {
         navigate("/bartender");
       } else if (res.data.role?.title === "cashier") {
-        navigate("/drinks");
+        navigate("/");
       }
 
       // if (["admin", "consultant", "cashier"].includes(res.data.role))

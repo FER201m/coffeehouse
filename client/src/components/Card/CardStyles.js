@@ -8,14 +8,15 @@ const styles = {
     height: 48,
   },
   card: {
-    width: 250,
+    width: 200,
+    height:300,
     position: "relative",
     margin: "0 auto",
   },
   imgProduct: {
     position: "absolute",
     borderRadius: "999px",
-    width: 200,
+    width: 170,
     background: "antiquewhite",
     top: "-75px",
     left: "50%",

@@ -29,12 +29,14 @@ const getStaff = async (req, res) => {
           dob: 1,
           address: 1,
           status: 1,
-          role: { $ifNull: ['$role._id', 'N/A'] }
-
+          role: { $ifNull: ['$role._id', 'N/A'] },
+          role_name: { $ifNull: ['$role.title', 'N/A'] },
         }
       },
       { $sort: { status: -1 } }
     ])
+
+    
     res.status(200).json(staff);
   } catch (error) {
     res.status(500).json({ message: error.message });

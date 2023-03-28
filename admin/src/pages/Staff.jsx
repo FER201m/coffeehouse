@@ -112,7 +112,7 @@ function Staff() {
         // { field: 'id', headerName: 'ID', width: 70 },
         { field: 'fullname', headerName: 'Full name', width: 210 },
         { field: 'phone', headerName: 'Phone', width: 210 },
-        { field: 'role', headerName: 'Role', width: 210 },
+        { field: 'role_name', headerName: 'Role', width: 210 },
         { field: 'email', headerName: 'Email', width: 300 },
         { field: 'gender', headerName: 'Gender', width: 210 },
         {
