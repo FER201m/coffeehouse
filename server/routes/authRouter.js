@@ -1,5 +1,4 @@
 var { login, logout, register } = require("../controllers/authController");
-const updateImage = require("../config/multerConfig");
 
 var express = require("express");
 const router = express.Router();
